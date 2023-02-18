@@ -2,7 +2,7 @@
 
 [![Build/test](https://github.com/matthias-Q/tree-sitter-prql/actions/workflows/ci.yml/badge.svg)](https://github.com/matthias-Q/tree-sitter-prql/actions/workflows/ci.yml)
 
-A general/permissive PRQL grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter).
+A PRQL grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter).
 
 ## Features
 
