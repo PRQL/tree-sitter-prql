@@ -643,11 +643,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "selects"
+          "name": "table_reference"
         }
       ]
     },
-    "selects": {
+    "table_reference": {
       "type": "CHOICE",
       "members": [
         {

@@ -126,7 +126,7 @@ select e.first_name
     (transforms
       (select
         (keyword_select)
-        (selects
+        (table_reference
           (field
             (identifier)
             (identifier)))))))
@@ -157,7 +157,7 @@ select [first_name, last_name]
           (literal)))
       (select
         (keyword_select)
-        (selects
+        (table_reference
           (term
             (field
               (identifier)))

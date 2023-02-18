@@ -167,10 +167,10 @@ module.exports = grammar({
 
         select: $ => seq(
             $.keyword_select,
-            $.selects,
+            $.table_reference,
         ),
 
-        selects: $ => choice(
+        table_reference: $ => choice(
             bracket_list($.term, false),
             $.field,
         ),
