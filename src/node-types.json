@@ -440,6 +440,10 @@
       "required": false,
       "types": [
         {
+          "type": "field",
+          "named": true
+        },
+        {
           "type": "term",
           "named": true
         }

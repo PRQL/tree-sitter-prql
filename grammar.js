@@ -170,7 +170,10 @@ module.exports = grammar({
             $.selects,
         ),
 
-        selects: $ => bracket_list($.term, false),
+        selects: $ => choice(
+            bracket_list($.term, false),
+            $.field,
+        ),
 
         term: $ => seq(
             choice(

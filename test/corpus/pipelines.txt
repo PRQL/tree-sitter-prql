@@ -105,6 +105,33 @@ take 10..100
           (literal))))))
 
 ================================================================================
+Pipeline with aliased column select
+================================================================================
+
+from e = employees
+select e.first_name
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (binary_expression
+          (field
+            (identifier))
+          (field
+            (identifier)))))
+    (transforms
+      (select
+        (keyword_select)
+        (selects
+          (field
+            (identifier)
+            (identifier)))))))
+
+================================================================================
 Pipeline with column select
 ================================================================================
 
