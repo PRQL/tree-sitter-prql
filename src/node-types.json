@@ -104,6 +104,10 @@
         "required": true,
         "types": [
           {
+            "type": "!=",
+            "named": false
+          },
+          {
             "type": "*",
             "named": false
           },
@@ -150,6 +154,14 @@
           {
             "type": "??",
             "named": false
+          },
+          {
+            "type": "keyword_and",
+            "named": true
+          },
+          {
+            "type": "keyword_or",
+            "named": true
           },
           {
             "type": "|",
@@ -540,6 +552,10 @@
     }
   },
   {
+    "type": "!=",
+    "named": false
+  },
+  {
     "type": "\"",
     "named": false
   },
@@ -549,6 +565,14 @@
   },
   {
     "type": "'",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
     "named": false
   },
   {
@@ -624,6 +648,10 @@
     "named": true
   },
   {
+    "type": "keyword_and",
+    "named": true
+  },
+  {
     "type": "keyword_average",
     "named": true
   },
@@ -677,6 +705,10 @@
   },
   {
     "type": "keyword_min",
+    "named": true
+  },
+  {
+    "type": "keyword_or",
     "named": true
   },
   {

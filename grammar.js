@@ -15,6 +15,8 @@ module.exports = grammar({
             'alias_assignment',
             'coalesce',
             'range',
+            'clause_connective',
+            'clause_disjunctive',
         ],
     ],
 
@@ -51,6 +53,9 @@ module.exports = grammar({
         keyword_left: _ => make_keyword("left"),
         keyword_right: _ => make_keyword("right"),
         keyword_full: _ => make_keyword("full"),
+        keyword_and: _ => make_keyword("and"),
+        keyword_or: _ => make_keyword("or"),
+        keyword_in: _ => make_keyword("in"),
 
         pipeline: $ => seq(
             $.from,
@@ -88,7 +93,19 @@ module.exports = grammar({
 
         filter: $ => seq(
             $.keyword_filter,
-            field("predicate", $._expression),
+            $._boolean_expression,
+            // TODO: (age | in 25..40)
+        ),
+
+        _boolean_expression: $ => seq(
+            choice(
+                seq(
+                    '(',
+                    field("predicate", $._expression),
+                    ')',
+                ),
+                field("predicate", $._expression),
+            ),
         ),
 
         aggregate: $ => seq(
@@ -198,14 +215,16 @@ module.exports = grammar({
             seq(optional("-"), $._number, "."),
         ),
 
-        field: $ => seq(
-            optional(
-                seq(
-                    field('table', $._alias_identifier),
-                    '.',
+        field: $ => prec(1,
+            seq(
+                optional(
+                    seq(
+                        field('table', $._alias_identifier),
+                        '.',
+                    ),
                 ),
+                field('name', $.identifier),
             ),
-            field('name', $.identifier),
         ),
 
         _alias_identifier : $ => choice(
@@ -224,12 +243,23 @@ module.exports = grammar({
             ['|', 'binary_pipe'],
             ['=', 'alias_assignment'],
             ['==', 'binary_relation'],
+            ['!=', 'binary_relation'],
             ['>', 'binary_relation'],
             ['>=', 'binary_relation'],
             ['<', 'binary_relation'],
             ['<=', 'binary_relation'],
             ['..', 'range'],
             ['??', 'coalesce'],
+          ].map(([operator, precedence]) =>
+            prec.left(precedence, seq(
+              field('left', $._expression),
+              field('operator', operator),
+              field('right', $._expression)
+            ))
+          ),
+          ...[
+            [$.keyword_and, 'clause_connective'],
+            [$.keyword_or, 'clause_disjunctive'],
           ].map(([operator, precedence]) =>
             prec.left(precedence, seq(
               field('left', $._expression),
