@@ -1,0 +1,14 @@
+{
+  "name": "tree-sitter-prql",
+  "version": "0.0.1",
+  "description": "A treesitter grammar for PRQL",
+  "main": "grammar.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.17.0"
+  }
+}

@@ -1,0 +1,240 @@
+================================================================================
+Simple pipeline
+================================================================================
+
+from employees
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (joins
+        (MISSING keyword_join)))))
+
+================================================================================
+Simple pipeline with tansform
+================================================================================
+
+from employees
+derive gross_salary
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (field
+            (identifier)))))))
+
+================================================================================
+Simple pipeline with tansform and sort
+================================================================================
+
+from employees
+derive gross_salary
+sort gross_salary
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (field
+            (identifier))))
+      (sorts
+        (keyword_sort)
+        (term
+          (field
+            (identifier)))))))
+
+================================================================================
+Full example CTE
+================================================================================
+
+from e = employees
+derive gross_salary
+sort gross_salary
+take 10..100
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (binary_expression
+          (field
+            (identifier))
+          (field
+            (identifier)))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (field
+            (identifier))))
+      (sorts
+        (keyword_sort)
+        (term
+          (field
+            (identifier))))
+      (takes
+        (keyword_take)
+        (binary_expression
+          (literal)
+          (literal))))))
+
+================================================================================
+Pipeline with column select
+================================================================================
+
+from employees
+filter department == "Product"
+select [first_name, last_name]
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (filter
+        (keyword_filter)
+        (binary_expression
+          (field
+            (identifier))
+          (literal)))
+      (select
+        (keyword_select)
+        (selects
+          (term
+            (field
+              (identifier)))
+          (term
+            (field
+              (identifier))))))))
+
+================================================================================
+Lists
+================================================================================
+
+from numbers
+derive [x = 1, y = 2]
+derive [
+  a = x,
+  b = y
+]
+derive [
+  c = a,
+  d = b,
+]
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (literal)))
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (literal))))
+      (derives
+        (keyword_derive)
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (field
+              (identifier))))
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (field
+              (identifier)))))
+      (derives
+        (keyword_derive)
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (field
+              (identifier))))
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (field
+              (identifier))))))))
+
+================================================================================
+Aggregates
+================================================================================
+
+from employees
+aggregate [
+  average salary,
+  ct = count
+]
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (aggregate
+        (keyword_aggregate)
+        (aggregate_operation
+          (keyword_average)
+          (field
+            (identifier)))
+        (binary_expression
+          (field
+            (identifier))
+          (field
+            (identifier)))))))
