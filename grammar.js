@@ -12,6 +12,7 @@ module.exports = grammar({
             'binary_times',
             'binary_pipe',
             'binary_relation',
+            'alias_assignment',
             'coalesce',
             'range',
         ],
@@ -45,6 +46,11 @@ module.exports = grammar({
         keyword_avg: _ => make_keyword("avg"),
         keyword_sum: _ => make_keyword("sum"),
         keyword_count_distinct: _ => make_keyword("count_distinct"),
+        keyword_side: _ => make_keyword("side"),
+        keyword_inner: _ => make_keyword("inner"),
+        keyword_left: _ => make_keyword("left"),
+        keyword_right: _ => make_keyword("right"),
+        keyword_full: _ => make_keyword("full"),
 
         pipeline: $ => seq(
             $.from,
@@ -124,8 +130,23 @@ module.exports = grammar({
 
         joins: $ => seq(
             $.keyword_join,
-            // TODO
+            seq(
+                seq($.keyword_side, ":"),
+                choice(
+                    $.keyword_inner,
+                    $.keyword_left,
+                    $.keyword_right,
+                    $.keyword_full,
+                ),
+                $.term,
+                optional($.conditions),
+            ),
         ),
+
+        conditions: $ => seq(
+            bracket_list($.binary_expression, false),
+        ),
+
 
         select: $ => seq(
             $.keyword_select,
@@ -177,7 +198,20 @@ module.exports = grammar({
             seq(optional("-"), $._number, "."),
         ),
 
-        field: $ => field('name', $.identifier),
+        field: $ => seq(
+            optional(
+                seq(
+                    field('table', $._alias_identifier),
+                    '.',
+                ),
+            ),
+            field('name', $.identifier),
+        ),
+
+        _alias_identifier : $ => choice(
+            $.identifier,
+            alias($._double_quote_string, $.identifier),
+        ),
 
         identifier: _ => /([a-zA-Z_][0-9a-zA-Z_]*)/,
 
@@ -188,7 +222,7 @@ module.exports = grammar({
             ['*', 'binary_times'],
             ['/', 'binary_times'],
             ['|', 'binary_pipe'],
-            ['=', 'binary_relation'],
+            ['=', 'alias_assignment'],
             ['==', 'binary_relation'],
             ['>', 'binary_relation'],
             ['>=', 'binary_relation'],
@@ -223,7 +257,6 @@ module.exports = grammar({
         comment: _ => seq('#', /.*/),
 
     },
-
 });
 
 function comma_list(field, requireFirst) {

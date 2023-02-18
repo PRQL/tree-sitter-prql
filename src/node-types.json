@@ -183,6 +183,21 @@
     "fields": {}
   },
   {
+    "type": "conditions",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "derives",
     "named": true,
     "fields": {},
@@ -212,6 +227,16 @@
       "name": {
         "multiple": false,
         "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "table": {
+        "multiple": false,
+        "required": false,
         "types": [
           {
             "type": "identifier",
@@ -275,15 +300,48 @@
     }
   },
   {
+    "type": "identifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "joins",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
+          "type": "conditions",
+          "named": true
+        },
+        {
+          "type": "keyword_full",
+          "named": true
+        },
+        {
+          "type": "keyword_inner",
+          "named": true
+        },
+        {
           "type": "keyword_join",
+          "named": true
+        },
+        {
+          "type": "keyword_left",
+          "named": true
+        },
+        {
+          "type": "keyword_right",
+          "named": true
+        },
+        {
+          "type": "keyword_side",
+          "named": true
+        },
+        {
+          "type": "term",
           "named": true
         }
       ]
@@ -522,6 +580,10 @@
     "named": false
   },
   {
+    "type": ":",
+    "named": false
+  },
+  {
     "type": "<",
     "named": false
   },
@@ -556,10 +618,6 @@
   {
     "type": "]",
     "named": false
-  },
-  {
-    "type": "identifier",
-    "named": true
   },
   {
     "type": "keyword_aggregate",
@@ -598,7 +656,19 @@
     "named": true
   },
   {
+    "type": "keyword_full",
+    "named": true
+  },
+  {
+    "type": "keyword_inner",
+    "named": true
+  },
+  {
     "type": "keyword_join",
+    "named": true
+  },
+  {
+    "type": "keyword_left",
     "named": true
   },
   {
@@ -610,7 +680,15 @@
     "named": true
   },
   {
+    "type": "keyword_right",
+    "named": true
+  },
+  {
     "type": "keyword_select",
+    "named": true
+  },
+  {
+    "type": "keyword_side",
     "named": true
   },
   {

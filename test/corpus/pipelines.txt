@@ -252,3 +252,72 @@ from employees # comment
         (field
           (identifier)))))
   (comment))
+
+================================================================================
+Joins
+================================================================================
+
+from employees
+join side:left positions [employees.id==positions.employee_id]
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (joins
+        (keyword_join)
+        (keyword_side)
+        (keyword_left)
+        (term
+          (field
+            (identifier)))
+        (conditions
+          (binary_expression
+            (field
+              (identifier)
+              (identifier))
+            (field
+              (identifier)
+              (identifier))))))))
+
+================================================================================
+Joins with alias
+================================================================================
+
+from employees
+join side:left p=positions [employees.id==p.employee_id]
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (joins
+        (keyword_join)
+        (keyword_side)
+        (keyword_left)
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (field
+              (identifier))))
+        (conditions
+          (binary_expression
+            (field
+              (identifier)
+              (identifier))
+            (field
+              (identifier)
+              (identifier))))))))
