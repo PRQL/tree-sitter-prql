@@ -11,5 +11,5 @@ For a complete list of features see the the [tests](test/corpus)
 ## References
 
 * [Website](https://prql-lang.org)
-* [Playground](https://prql-lang.org/book)
+* [Playground](https://prql-lang.org/playground)
 * [Language Docs](https://prql-lang.org/book)
