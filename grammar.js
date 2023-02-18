@@ -135,7 +135,30 @@ module.exports = grammar({
         
         sorts: $ => seq(
             $.keyword_sort,
-            $.term,
+            choice(
+                bracket_list(
+                    seq(
+                        optional(
+                            $.direction,
+                        ),
+                        $.term,
+                    ),
+                    false
+                ),
+                seq(
+                    optional(
+                        $.direction,
+                    ),
+                    $.term,
+                ),
+            ),
+        ),
+
+        direction: $ => prec.left (
+            choice(
+                '-',
+                '+',
+            ),
         ),
 
         takes: $ => seq(
@@ -163,7 +186,7 @@ module.exports = grammar({
             ')',
         ),
 
-
+        // TODO: self joins -> join positions [==emp_no]
         joins: $ => seq(
             $.keyword_join,
             seq(
@@ -221,6 +244,7 @@ module.exports = grammar({
         ),
 
         _double_quote_string: _ => seq('"', /[^"]*/, '"'),
+
 
         _literal_string: $ => prec(1,
             choice(
@@ -307,6 +331,8 @@ module.exports = grammar({
         ),
 
         comment: _ => seq('#', /.*/),
+
+        bang: _ => '!',
 
     },
 });

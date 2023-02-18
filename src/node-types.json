@@ -233,6 +233,11 @@
     }
   },
   {
+    "type": "direction",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "field",
     "named": true,
     "fields": {
@@ -470,6 +475,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "direction",
+          "named": true
+        },
         {
           "type": "keyword_sort",
           "named": true
