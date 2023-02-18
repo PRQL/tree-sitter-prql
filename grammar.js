@@ -1,6 +1,11 @@
 module.exports = grammar({
     name: 'prql',
 
+    extras: $ => [
+        /\s\n/,
+        /\s/,
+        $.comment,
+    ],
     precedences: $ => [
         [
             'binary_plus',
@@ -43,7 +48,7 @@ module.exports = grammar({
 
         pipeline: $ => seq(
             $.from,
-            $.transforms,
+            optional($.transforms),
         ),
 
         transforms: $ => repeat1(
@@ -119,6 +124,7 @@ module.exports = grammar({
 
         joins: $ => seq(
             $.keyword_join,
+            // TODO
         ),
 
         select: $ => seq(
@@ -213,6 +219,8 @@ module.exports = grammar({
                 $._double_quote_string,
             ),
         ),
+
+        comment: _ => seq('#', /.*/),
 
     },
 

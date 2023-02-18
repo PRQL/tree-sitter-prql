@@ -12,10 +12,7 @@ from employees
       (keyword_from)
       (term
         (field
-          (identifier))))
-    (transforms
-      (joins
-        (MISSING keyword_join)))))
+          (identifier))))))
 
 ================================================================================
 Simple pipeline with tansform
@@ -238,3 +235,20 @@ aggregate [
             (identifier))
           (field
             (identifier)))))))
+
+================================================================================
+Comments
+================================================================================
+
+from employees # comment
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier)))))
+  (comment))
