@@ -1,0 +1,77 @@
+================================================================================
+Simple sort
+================================================================================
+
+from employees
+sort age
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (sorts
+        (keyword_sort)
+        (term
+          (field
+            (identifier)))))))
+
+================================================================================
+Simple sort with direction
+================================================================================
+
+from employees
+sort [-age]
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (sorts
+        (keyword_sort)
+        (direction)
+        (term
+          (field
+            (identifier)))))))
+
+================================================================================
+Multiple sorts with direction
+================================================================================
+
+from employees
+sort [age, -tenure, +salary]
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (sorts
+        (keyword_sort)
+        (term
+          (field
+            (identifier)))
+        (direction)
+        (term
+          (field
+            (identifier)))
+        (direction)
+        (term
+          (field
+            (identifier)))))))
