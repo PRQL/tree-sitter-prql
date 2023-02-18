@@ -71,6 +71,7 @@ module.exports = grammar({
                 $.filter,
                 $.select,
                 $.aggregate,
+                $.group,
             )
         ),
 
@@ -131,7 +132,7 @@ module.exports = grammar({
             ),
             $._expression,
         ),
-
+        
         sorts: $ => seq(
             $.keyword_sort,
             $.term,
@@ -144,6 +145,24 @@ module.exports = grammar({
                 $.binary_expression
             )
         ),
+
+        group: $ => seq(
+            $.keyword_group,
+            choice(
+                bracket_list($.term),
+                $.term,
+            ),
+            '(',
+                repeat1(
+                    choice(
+                        $.aggregate,
+                        $.sorts,
+                        $.takes,
+                    ),
+                ),
+            ')',
+        ),
+
 
         joins: $ => seq(
             $.keyword_join,

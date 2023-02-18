@@ -173,6 +173,10 @@
           {
             "type": "SYMBOL",
             "name": "aggregate"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "group"
           }
         ]
       }
@@ -504,6 +508,110 @@
               "name": "binary_expression"
             }
           ]
+        }
+      ]
+    },
+    "group": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_group"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "["
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "SYMBOL",
+                          "name": "term"
+                        },
+                        {
+                          "type": "REPEAT",
+                          "content": {
+                            "type": "SEQ",
+                            "members": [
+                              {
+                                "type": "STRING",
+                                "value": ","
+                              },
+                              {
+                                "type": "SYMBOL",
+                                "name": "term"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": ","
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                },
+                {
+                  "type": "STRING",
+                  "value": "]"
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "term"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "aggregate"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "sorts"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "takes"
+              }
+            ]
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         }
       ]
     },

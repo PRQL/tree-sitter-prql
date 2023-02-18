@@ -312,6 +312,37 @@
     }
   },
   {
+    "type": "group",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "aggregate",
+          "named": true
+        },
+        {
+          "type": "keyword_group",
+          "named": true
+        },
+        {
+          "type": "sorts",
+          "named": true
+        },
+        {
+          "type": "takes",
+          "named": true
+        },
+        {
+          "type": "term",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "identifier",
     "named": true,
     "fields": {}
@@ -537,6 +568,10 @@
           "named": true
         },
         {
+          "type": "group",
+          "named": true
+        },
+        {
           "type": "joins",
           "named": true
         },
@@ -689,6 +724,10 @@
   },
   {
     "type": "keyword_full",
+    "named": true
+  },
+  {
+    "type": "keyword_group",
     "named": true
   },
   {

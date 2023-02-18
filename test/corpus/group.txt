@@ -1,0 +1,142 @@
+================================================================================
+Simple single group
+================================================================================
+
+from employees
+group title (
+  aggregate [
+    average salary,
+    ct = count
+  ]
+)
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (group
+        (keyword_group)
+        (term
+          (field
+            (identifier)))
+        (aggregate
+          (keyword_aggregate)
+          (aggregate_operation
+            (keyword_average)
+            (field
+              (identifier)))
+          (binary_expression
+            (field
+              (identifier))
+            (field
+              (identifier))))))))
+
+================================================================================
+Simple group
+================================================================================
+
+from employees
+group [title, country] (
+  aggregate [
+    average salary,
+    ct = count
+  ]
+)
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (group
+        (keyword_group)
+        (term
+          (field
+            (identifier)))
+        (term
+          (field
+            (identifier)))
+        (aggregate
+          (keyword_aggregate)
+          (aggregate_operation
+            (keyword_average)
+            (field
+              (identifier)))
+          (binary_expression
+            (field
+              (identifier))
+            (field
+              (identifier))))))))
+
+================================================================================
+Group sort take
+================================================================================
+
+from employees
+sort join_date
+take 1
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (sorts
+        (keyword_sort)
+        (term
+          (field
+            (identifier))))
+      (takes
+        (keyword_take)
+        (term)))))
+
+================================================================================
+Group one column; sort and take
+================================================================================
+
+from employees
+group role (
+  sort join_date  # taken from above
+  take 1
+)
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (group
+        (keyword_group)
+        (term
+          (field
+            (identifier)))
+        (sorts
+          (keyword_sort)
+          (term
+            (field
+              (identifier))))
+        (comment)
+        (takes
+          (keyword_take)
+          (term))))))
