@@ -82,7 +82,7 @@ take 10..100
     (from
       (keyword_from)
       (term
-        (binary_expression
+        (assignment
           (field
             (identifier))
           (field
@@ -100,7 +100,7 @@ take 10..100
             (identifier))))
       (takes
         (keyword_take)
-        (binary_expression
+        (range
           (literal)
           (literal))))))
 
@@ -118,7 +118,7 @@ select e.first_name
     (from
       (keyword_from)
       (term
-        (binary_expression
+        (assignment
           (field
             (identifier))
           (field
@@ -193,25 +193,25 @@ derive [
       (derives
         (keyword_derive)
         (term
-          (binary_expression
+          (assignment
             (field
               (identifier))
             (literal)))
         (term
-          (binary_expression
+          (assignment
             (field
               (identifier))
             (literal))))
       (derives
         (keyword_derive)
         (term
-          (binary_expression
+          (assignment
             (field
               (identifier))
             (field
               (identifier))))
         (term
-          (binary_expression
+          (assignment
             (field
               (identifier))
             (field
@@ -219,13 +219,13 @@ derive [
       (derives
         (keyword_derive)
         (term
-          (binary_expression
+          (assignment
             (field
               (identifier))
             (field
               (identifier))))
         (term
-          (binary_expression
+          (assignment
             (field
               (identifier))
             (field
@@ -257,7 +257,7 @@ aggregate [
           (keyword_average)
           (field
             (identifier)))
-        (binary_expression
+        (assignment
           (field
             (identifier))
           (field
@@ -335,7 +335,7 @@ join side:left p=positions [employees.id==p.employee_id]
         (keyword_side)
         (keyword_left)
         (term
-          (binary_expression
+          (assignment
             (field
               (identifier))
             (field

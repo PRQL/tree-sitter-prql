@@ -25,7 +25,6 @@ module.exports = grammar({
             $.pipeline,
             // $.function,
             // $.variable,
-
         ),
 
         keyword_from: _ => make_keyword("from"),
@@ -35,6 +34,7 @@ module.exports = grammar({
         keyword_aggregate: _ => make_keyword("aggregate"),
         keyword_sort: _ => make_keyword("sort"),
         keyword_take: _ => make_keyword("take"),
+        keyword_window: _ => make_keyword("window"),
         keyword_join: _ => make_keyword("join"),
         keyword_select: _ => make_keyword("select"),
         keyword_true: _ => make_keyword("true"),
@@ -56,6 +56,9 @@ module.exports = grammar({
         keyword_and: _ => make_keyword("and"),
         keyword_or: _ => make_keyword("or"),
         keyword_in: _ => make_keyword("in"),
+        keyword_rolling: _ => make_keyword("rolling"),
+        keyword_rows: _ => make_keyword("rows"),
+        keyword_expanding: _ => make_keyword("expanding"),
 
         pipeline: $ => seq(
             $.from,
@@ -115,6 +118,8 @@ module.exports = grammar({
                 choice(
                     $.binary_expression,
                     $.aggregate_operation,
+                    alias($._aggregate_count, $.aggregate_operation),
+                    $.assignment,
                 ),
             )
         ),
@@ -123,7 +128,6 @@ module.exports = grammar({
             choice(
                 $.keyword_min,
                 $.keyword_max,
-                $.keyword_count,
                 $.keyword_count_distinct,
                 $.keyword_average,
                 $.keyword_avg,
@@ -131,6 +135,11 @@ module.exports = grammar({
                 $.keyword_stddev,
             ),
             $._expression,
+        ),
+
+        _aggregate_count: $ => seq(
+            $.keyword_count,
+            optional($._expression),
         ),
         
         sorts: $ => seq(
@@ -165,7 +174,32 @@ module.exports = grammar({
             $.keyword_take,
             choice(
                 alias($._number, $.term),
-                $.binary_expression
+                $.range
+            )
+        ),
+
+        window: $ => seq(
+            $.keyword_window,
+            $.window_definitions,
+            '(',
+            $.derives,
+            ')',
+        ),
+
+        window_definitions: $ => repeat1(
+            $._window_definition,
+        ),
+
+        _window_definition: $ => seq(
+            choice(
+                $.keyword_rolling,
+                $.keyword_rows,
+                $.keyword_expanding,
+            ),
+            ':',
+            choice(
+                $.range,
+                alias($._number, $.literal),
             )
         ),
 
@@ -181,6 +215,7 @@ module.exports = grammar({
                         $.aggregate,
                         $.sorts,
                         $.takes,
+                        $.window,
                     ),
                 ),
             ')',
@@ -220,6 +255,7 @@ module.exports = grammar({
         term: $ => seq(
             choice(
                 field("value", $._expression),
+                field("value", $.assignment),
                 $._double_quote_string,
             ),
         ),
@@ -280,6 +316,36 @@ module.exports = grammar({
 
         identifier: _ => /([a-zA-Z_][0-9a-zA-Z_]*)/,
 
+        range:$ => choice (...[
+            ['..', 'range'],
+        ].map(([operator, range_prec]) =>
+            prec.left(range_prec, seq(
+              field('from', $._expression),
+              field('operator', operator),
+              field('till', $._expression)
+            ))
+          ),
+        ),
+
+        assignment: $ => choice(... [
+            ['=', 'alias_assignment'],
+        ].map(([operator, range_prec]) =>
+            prec.left(range_prec, seq(
+              field('alias', $._expression),
+              field('operator', operator),
+              field('operation', seq(
+                  optional(
+                      choice(
+                          $.keyword_average,
+                          $.keyword_sum,
+                      ),
+                  ),
+                  $._expression),
+              )
+            ))
+          ),
+        ),
+
         binary_expression: $ => choice(
           ...[
             ['+', 'binary_plus'],
@@ -287,14 +353,13 @@ module.exports = grammar({
             ['*', 'binary_times'],
             ['/', 'binary_times'],
             ['|', 'binary_pipe'],
-            ['=', 'alias_assignment'],
+            // ['=', 'alias_assignment'],
             ['==', 'binary_relation'],
             ['!=', 'binary_relation'],
             ['>', 'binary_relation'],
             ['>=', 'binary_relation'],
             ['<', 'binary_relation'],
             ['<=', 'binary_relation'],
-            ['..', 'range'],
             ['??', 'coalesce'],
           ].map(([operator, precedence]) =>
             prec.left(precedence, seq(

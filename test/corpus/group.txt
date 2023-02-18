@@ -31,7 +31,7 @@ group title (
             (keyword_average)
             (field
               (identifier)))
-          (binary_expression
+          (assignment
             (field
               (identifier))
             (field
@@ -73,7 +73,7 @@ group [title, country] (
             (keyword_average)
             (field
               (identifier)))
-          (binary_expression
+          (assignment
             (field
               (identifier))
             (field
