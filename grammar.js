@@ -99,10 +99,6 @@ module.exports = grammar({
             )
         ),
 
-        // _derive_expression: $ => seq(
-        //     $.alias_assignment
-        // ),
-
         filter: $ => seq(
             $.keyword_filter,
             $._boolean_expression,
