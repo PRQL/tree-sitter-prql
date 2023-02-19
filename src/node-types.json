@@ -321,6 +321,10 @@
         {
           "type": "binary_expression",
           "named": true
+        },
+        {
+          "type": "term",
+          "named": true
         }
       ]
     }

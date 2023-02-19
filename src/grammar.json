@@ -934,36 +934,14 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "keyword_side"
-                },
-                {
-                  "type": "STRING",
-                  "value": ":"
-                }
-              ]
-            },
-            {
               "type": "CHOICE",
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "keyword_inner"
+                  "name": "_join_definition"
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "keyword_left"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "keyword_right"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "keyword_full"
+                  "type": "BLANK"
                 }
               ]
             },
@@ -987,8 +965,47 @@
         }
       ]
     },
-    "conditions": {
+    "_join_definition": {
       "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "keyword_side"
+            },
+            {
+              "type": "STRING",
+              "value": ":"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "keyword_inner"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "keyword_left"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "keyword_right"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "keyword_full"
+            }
+          ]
+        }
+      ]
+    },
+    "conditions": {
+      "type": "CHOICE",
       "members": [
         {
           "type": "SEQ",
@@ -1047,6 +1064,31 @@
               "value": "]"
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_self_join"
+        }
+      ]
+    },
+    "_self_join": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "STRING",
+          "value": "=="
+        },
+        {
+          "type": "SYMBOL",
+          "name": "term"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
         }
       ]
     },

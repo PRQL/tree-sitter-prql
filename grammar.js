@@ -225,24 +225,35 @@ module.exports = grammar({
             ')',
         ),
 
-        // TODO: self joins -> join positions [==emp_no]
         joins: $ => seq(
             $.keyword_join,
             seq(
-                seq($.keyword_side, ":"),
-                choice(
-                    $.keyword_inner,
-                    $.keyword_left,
-                    $.keyword_right,
-                    $.keyword_full,
-                ),
+                optional($._join_definition),
                 $.term,
                 optional($.conditions),
             ),
         ),
 
-        conditions: $ => seq(
+        _join_definition: $ => seq(
+            seq($.keyword_side, ":"),
+            choice(
+                $.keyword_inner,
+                $.keyword_left,
+                $.keyword_right,
+                $.keyword_full,
+            ),
+        ),
+
+        conditions: $ => choice(
             sq_bracket_list($.binary_expression, false),
+            $._self_join,
+        ),
+
+        _self_join: $ => seq(
+            '[',
+            '==',
+            $.term,
+            ']',
         ),
 
 
