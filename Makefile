@@ -14,3 +14,10 @@ format: generate
 
 compile: generate
 	gcc -shared -o target/parser.so -fPIC src/parser.c -I./src
+
+watch_playground:
+	watchexec -e txt,js,prql "tree-sitter generate && tree-sitter parse test.prql"
+
+watch_compile:
+	watchexec -e txt,js,prql "prqlc compile test.prql"
+
