@@ -423,9 +423,9 @@ module.exports = grammar({
 
         timestamp: $ => prec.right(seq(
             '@',
-            optional($._date),
+            $._date,
             'T',
-            optional($._time),
+            $._time,
             optional($.timezone),
         ),
         ),
