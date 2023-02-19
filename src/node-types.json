@@ -735,11 +735,11 @@
           "named": true
         },
         {
-          "type": "range",
+          "type": "literal",
           "named": true
         },
         {
-          "type": "term",
+          "type": "range",
           "named": true
         }
       ]

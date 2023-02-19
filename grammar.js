@@ -87,7 +87,7 @@ module.exports = grammar({
             $.keyword_derive,
             choice(
                 $.term,
-                bracket_list(
+                sq_bracket_list(
                     choice(
                         $.term,
                         $.binary_expression),
@@ -114,7 +114,7 @@ module.exports = grammar({
 
         aggregate: $ => seq(
             $.keyword_aggregate,
-            bracket_list(
+            sq_bracket_list(
                 choice(
                     $.binary_expression,
                     $.aggregate_operation,
@@ -145,7 +145,7 @@ module.exports = grammar({
         sorts: $ => seq(
             $.keyword_sort,
             choice(
-                bracket_list(
+                sq_bracket_list(
                     seq(
                         optional(
                             $.direction,
@@ -173,7 +173,7 @@ module.exports = grammar({
         takes: $ => seq(
             $.keyword_take,
             choice(
-                alias($._number, $.term),
+                alias($._natural_number, $.literal),
                 $.range
             )
         ),
@@ -199,14 +199,14 @@ module.exports = grammar({
             ':',
             choice(
                 $.range,
-                alias($._number, $.literal),
+                alias($._integer, $.literal),
             )
         ),
 
         group: $ => seq(
             $.keyword_group,
             choice(
-                bracket_list($.term),
+                sq_bracket_list($.term),
                 $.term,
             ),
             '(',
@@ -238,7 +238,7 @@ module.exports = grammar({
         ),
 
         conditions: $ => seq(
-            bracket_list($.binary_expression, false),
+            sq_bracket_list($.binary_expression, false),
         ),
 
 
@@ -248,7 +248,7 @@ module.exports = grammar({
         ),
 
         table_reference: $ => choice(
-            bracket_list($.term, false),
+            sq_bracket_list($.term, false),
             $.field,
         ),
 
@@ -260,7 +260,7 @@ module.exports = grammar({
             ),
         ),
 
-        _expression: $ => prec(1,
+        _expression: $ => prec(2,
             choice(
                 $.field,
                 $.date,
@@ -271,10 +271,9 @@ module.exports = grammar({
             ),
         ),
 
-
         literal: $ => prec(2,
             choice(
-                $._number,
+                $._integer,
                 $._decimal_number,
                 $._literal_string,
                 $.keyword_true,
@@ -292,12 +291,12 @@ module.exports = grammar({
             ),
         ),
 
-        _number: _ => /\d+/,
-
+        _natural_number: _ => /\d+/,
+        _integer: $ => seq(optional("-"), $._natural_number),
         _decimal_number: $ => choice(
-            seq(optional("-"), ".", $._number),
-            seq(optional("-"), $._number, ".", $._number),
-            seq(optional("-"), $._number, "."),
+            seq(optional("-"), ".", $._natural_number),
+            seq($._integer, ".", $._natural_number),
+            seq($._integer, "."),
         ),
 
         field: $ => prec(1,
@@ -411,7 +410,7 @@ module.exports = grammar({
             optional(
                 seq(
                     '.',
-                    $._number,
+                    $._integer,
                 ),
             ),
         ),
@@ -438,20 +437,6 @@ module.exports = grammar({
             ),
         ),
 
-        _number: _ => /\d+/,
-        _decimal_number: $ => choice(
-            seq(optional("-"), ".", $._number),
-            seq(optional("-"), $._number, ".", $._number),
-            seq(optional("-"), $._number, "."),
-        ),
-
-        _double_quote_string: _ => seq('"', /[^"]*/, '"'),
-        _literal_string: $ => prec(1,
-            choice(
-                seq("'", /[^']*/, "'"),
-                $._double_quote_string,
-            ),
-        ),
 
         comment: _ => seq('#', /.*/),
 
@@ -480,7 +465,16 @@ function comma_list(field, requireFirst) {
   );
 }
 
-function bracket_list(field, requireFirst) {
+
+function paren_list(field, requireFirst) {
+  return seq(
+    '(',
+    comma_list(field, requireFirst),
+    ')',
+  )
+}
+
+function sq_bracket_list(field, requireFirst) {
   return seq(
     '[',
     comma_list(field, requireFirst),

@@ -688,10 +688,10 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "_number"
+                "name": "_natural_number"
               },
               "named": true,
-              "value": "term"
+              "value": "literal"
             },
             {
               "type": "SYMBOL",
@@ -768,7 +768,7 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "_number"
+                "name": "_integer"
               },
               "named": true,
               "value": "literal"
@@ -1124,7 +1124,7 @@
     },
     "_expression": {
       "type": "PREC",
-      "value": 1,
+      "value": 2,
       "content": {
         "type": "CHOICE",
         "members": [
@@ -1163,7 +1163,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "_number"
+            "name": "_integer"
           },
           {
             "type": "SYMBOL",
@@ -1231,9 +1231,30 @@
         ]
       }
     },
-    "_number": {
+    "_natural_number": {
       "type": "PATTERN",
       "value": "\\d+"
+    },
+    "_integer": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "-"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_natural_number"
+        }
+      ]
     },
     "_decimal_number": {
       "type": "CHOICE",
@@ -1259,7 +1280,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "_number"
+              "name": "_natural_number"
             }
           ]
         },
@@ -1267,20 +1288,8 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "-"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
               "type": "SYMBOL",
-              "name": "_number"
+              "name": "_integer"
             },
             {
               "type": "STRING",
@@ -1288,7 +1297,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "_number"
+              "name": "_natural_number"
             }
           ]
         },
@@ -1296,20 +1305,8 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "-"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
               "type": "SYMBOL",
-              "name": "_number"
+              "name": "_integer"
             },
             {
               "type": "STRING",
@@ -2051,7 +2048,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_number"
+                  "name": "_integer"
                 }
               ]
             },
