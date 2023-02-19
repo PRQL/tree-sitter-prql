@@ -87,13 +87,21 @@ module.exports = grammar({
             $.keyword_derive,
             choice(
                 $.term,
+                $.assignment,
                 sq_bracket_list(
                     choice(
                         $.term,
-                        $.binary_expression),
-                    false),
+                        $.binary_expression,
+                        seq('(', $.binary_expression, ')'),
+                    ),
+                    false
+                ),
             )
         ),
+
+        // _derive_expression: $ => seq(
+        //     $.alias_assignment
+        // ),
 
         filter: $ => seq(
             $.keyword_filter,
@@ -252,11 +260,13 @@ module.exports = grammar({
             $.field,
         ),
 
-        term: $ => seq(
-            choice(
-                field("value", $._expression),
-                field("value", $.assignment),
-                $._double_quote_string,
+        term: $ => prec(2,
+            seq(
+                choice(
+                    field("value", $._expression),
+                    field("value", $.assignment),
+                    $._double_quote_string,
+                ),
             ),
         ),
 
@@ -332,21 +342,37 @@ module.exports = grammar({
         assignment: $ => choice(... [
             ['=', 'alias_assignment'],
         ].map(([operator, range_prec]) =>
-            prec.left(range_prec, seq(
-              field('alias', $._expression),
-              field('operator', operator),
-              field('operation', seq(
-                  optional(
-                      choice(
-                          $.keyword_average,
-                          $.keyword_sum,
+            prec.left(range_prec, choice(
+                seq(
+                    field('alias', $._expression),
+                    field('operator', operator),
+                    field('operation', seq(
+                        optional(
+                            choice(
+                                $.keyword_average,
+                                $.keyword_sum,
+                            ),
                       ),
-                  ),
-                  $._expression),
-              )
-            ))
-          ),
-        ),
+                      $._expression),
+                    ),
+                ),
+                seq(
+                    field('alias', $._expression),
+                    field('operator', operator),
+                    '(',
+                    field('operation', seq(
+                        optional(
+                            choice(
+                                $.keyword_average,
+                                $.keyword_sum,
+                            ),
+                      ),
+                      $._expression),
+                    ),
+                    ')',
+                ),
+            ),
+        ))),
 
         binary_expression: $ => choice(
           ...[

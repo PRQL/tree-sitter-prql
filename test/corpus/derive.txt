@@ -1,0 +1,139 @@
+================================================================================
+Single Derive
+================================================================================
+
+from employees
+derive gross_salary = salary + payroll_tax
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (binary_expression
+              (field
+                (identifier))
+              (field
+                (identifier)))))))))
+
+================================================================================
+Multiple Derive
+================================================================================
+
+from employees
+derive [
+  gross_salary = salary + payroll_tax,
+  gross_cost = gross_salary + benefits_cost
+]
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (binary_expression
+              (field
+                (identifier))
+              (field
+                (identifier)))))
+        (term
+          (assignment
+            (field
+              (identifier))
+            (binary_expression
+              (field
+                (identifier))
+              (field
+                (identifier)))))))))
+
+================================================================================
+Derive with assignment in parens
+================================================================================
+
+from employees
+derive gross_salary = (salary + payroll_tax)
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (binary_expression
+              (field
+                (identifier))
+              (field
+                (identifier)))))))))
+
+================================================================================
+Complex Derive
+================================================================================
+
+from employees
+derive [
+  gross_salary = (salary + payroll_tax),
+  gross_cost = gross_salary + benefits_cost
+]
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (binary_expression
+              (field
+                (identifier))
+              (field
+                (identifier)))))
+        (term
+          (assignment
+            (field
+              (identifier))
+            (binary_expression
+              (field
+                (identifier))
+              (field
+                (identifier)))))))))
