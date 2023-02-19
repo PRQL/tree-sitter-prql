@@ -263,6 +263,9 @@ module.exports = grammar({
         _expression: $ => prec(1,
             choice(
                 $.field,
+                $.date,
+                $.time,
+                $.timestamp,
                 $.binary_expression,
                 $.literal,
             ),
@@ -353,7 +356,6 @@ module.exports = grammar({
             ['*', 'binary_times'],
             ['/', 'binary_times'],
             ['|', 'binary_pipe'],
-            // ['=', 'alias_assignment'],
             ['==', 'binary_relation'],
             ['!=', 'binary_relation'],
             ['>', 'binary_relation'],
@@ -378,6 +380,62 @@ module.exports = grammar({
               field('right', $._expression)
             ))
           ),
+        ),
+
+        _date: _ => seq(
+            /\d{4}/,
+            '-',
+            /\d{1,2}/,
+            '-',
+            /\d{1,2}/,
+        ),
+        date: $ => seq(
+            '@',
+            $._date,
+        ),
+
+        _time: $ => seq(
+            /\d{2}/,
+            optional(
+                seq(
+                    ':',
+                    /\d{1,2}/,
+                ),
+            ),
+            optional(
+                seq(
+                    ':',
+                    /\d{1,2}/,
+                ),
+            ),
+            optional(
+                seq(
+                    '.',
+                    $._number,
+                ),
+            ),
+        ),
+
+        time: $ => seq(
+            '@',
+            $._time,
+        ),
+
+        timestamp: $ => prec.right(seq(
+            '@',
+            optional($._date),
+            'T',
+            optional($._time),
+            optional($.timezone),
+        ),
+        ),
+
+        timezone: $ => choice(
+            'Z',
+            seq(
+                $.direction,
+                /\d{1,2}/,
+            ),
         ),
 
         _number: _ => /\d+/,

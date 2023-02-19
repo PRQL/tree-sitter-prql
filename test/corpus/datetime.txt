@@ -1,0 +1,229 @@
+================================================================================
+Date
+================================================================================
+
+from employees
+derive order <  @2022-12-31
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (date)))))))
+
+================================================================================
+Time full
+================================================================================
+
+from employees
+derive order <  @16:54:32.123456
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (time)))))))
+
+================================================================================
+Time hour
+================================================================================
+
+from employees
+derive order <  @16
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (time)))))))
+
+================================================================================
+Time hour:minute
+================================================================================
+
+from employees
+derive order <  @16:32
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (time)))))))
+
+================================================================================
+Time hour:minute:seconds
+================================================================================
+
+from employees
+derive order <  @16:32:45
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (time)))))))
+
+================================================================================
+Timestamp without timezone
+================================================================================
+
+from employees
+derive order <  @2022-12-31T16:54:32.123456
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (timestamp)))))))
+
+================================================================================
+Timestamp UTC
+================================================================================
+
+from employees
+derive order <  @2022-12-31T16:54:32.123456Z
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (timestamp
+              (timezone))))))))
+
+================================================================================
+Timestamp UTC+2
+================================================================================
+
+from employees
+derive order <  @2022-12-31T16:54:32.123456+02
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (timestamp
+              (timezone
+                (direction)))))))))
+
+================================================================================
+Timestamp UTC-2
+================================================================================
+
+from employees
+derive order <  @2022-12-31T16:54:32.123456-02
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (binary_expression
+            (field
+              (identifier))
+            (timestamp
+              (timezone
+                (direction)))))))))

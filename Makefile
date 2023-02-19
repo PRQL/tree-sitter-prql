@@ -21,3 +21,5 @@ watch_playground:
 watch_compile:
 	watchexec -e txt,js,prql "prqlc compile test.prql"
 
+watch_tests:
+	watchexec -e txt,js,prql "tree-sitter generate && tree-sitter test"
