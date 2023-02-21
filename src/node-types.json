@@ -98,9 +98,17 @@
     "named": true,
     "fields": {
       "alias": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
           {
             "type": "binary_expression",
             "named": true
@@ -131,6 +139,14 @@
         "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
           {
             "type": "binary_expression",
             "named": true
@@ -182,9 +198,17 @@
     "named": true,
     "fields": {
       "left": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
           {
             "type": "binary_expression",
             "named": true
@@ -274,9 +298,17 @@
         ]
       },
       "right": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
           {
             "type": "binary_expression",
             "named": true
@@ -397,9 +429,17 @@
     "named": true,
     "fields": {
       "predicate": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
           {
             "type": "binary_expression",
             "named": true
@@ -598,9 +638,17 @@
     "named": true,
     "fields": {
       "from": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
           {
             "type": "binary_expression",
             "named": true
@@ -638,9 +686,17 @@
         ]
       },
       "till": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
           {
             "type": "binary_expression",
             "named": true
@@ -758,9 +814,17 @@
     "named": true,
     "fields": {
       "value": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
           {
             "type": "assignment",
             "named": true

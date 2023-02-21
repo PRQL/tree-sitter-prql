@@ -137,3 +137,35 @@ derive [
                 (identifier))
               (field
                 (identifier)))))))))
+
+================================================================================
+Assignment with parenthesis rules
+================================================================================
+
+from tab
+derive x = a + (a * b)
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (binary_expression
+              (field
+                (identifier))
+              (binary_expression
+                (field
+                  (identifier))
+                (field
+                  (identifier))))))))))

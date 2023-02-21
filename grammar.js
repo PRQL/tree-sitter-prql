@@ -88,6 +88,7 @@ module.exports = grammar({
             choice(
                 $.term,
                 $.assignment,
+                $.binary_expression,
                 sq_bracket_list(
                     choice(
                         $.term,
@@ -107,11 +108,7 @@ module.exports = grammar({
 
         _boolean_expression: $ => seq(
             choice(
-                seq(
-                    '(',
-                    field("predicate", $._expression),
-                    ')',
-                ),
+                parens(field("predicate", $._expression)),
                 field("predicate", $._expression),
             ),
         ),
@@ -277,16 +274,17 @@ module.exports = grammar({
             ),
         ),
 
-        _expression: $ => prec(2,
+        _expression: $ => prec(2,prec.left(
             choice(
                 $.field,
                 $.date,
                 $.time,
                 $.timestamp,
                 $.binary_expression,
+                parens($.binary_expression),
                 $.literal,
             ),
-        ),
+        )),
 
         literal: $ => prec(2,
             choice(
@@ -406,12 +404,22 @@ module.exports = grammar({
             [$.keyword_and, 'clause_connective'],
             [$.keyword_or, 'clause_disjunctive'],
           ].map(([operator, precedence]) =>
-            prec.left(precedence, seq(
-              field('left', $._expression),
-              field('operator', operator),
-              field('right', $._expression)
-            ))
+            prec.left(precedence, choice(
+                seq(
+                    field('left', $._expression),
+                    field('operator', operator),
+                    field('right', $._expression),
+                ),
+                seq(
+                    '(',
+                    field('left', $._expression),
+                    field('operator', operator),
+                    field('right', $._expression),
+                    ')',
+                ),
+            ),
           ),
+        ),
         ),
 
         _date: _ => seq(
@@ -498,6 +506,13 @@ function comma_list(field, requireFirst) {
   );
 }
 
+function parens(field) {
+  return seq(
+    '(',
+    field,
+    ')',
+  )
+}
 
 function paren_list(field, requireFirst) {
   return seq(
