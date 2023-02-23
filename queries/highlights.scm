@@ -18,11 +18,17 @@
   (keyword_rolling)
   (keyword_rows)
   (keyword_expanding)
+  (keyword_func)
 ] @keyword
 
 (literal) @string
 
 (comment) @comment
+
+(keyword_func) @function
+
+(function_call
+  (identifier)) @function.call
 
 [
   "+"
@@ -36,6 +42,7 @@
   "!="
   ">="
   ">"
+  "->"
 ] @operator
 
 [
@@ -100,3 +107,13 @@
  (keyword_and)
  (keyword_or)
 ] @keyword.operator
+
+(function_definition
+  (keyword_func)
+  name: (identifier) @function)
+
+(parameter
+  (identifier) @parameter)
+
+(function_call
+  name: (identifier) @function.call)

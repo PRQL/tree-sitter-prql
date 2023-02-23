@@ -149,7 +149,7 @@
       },
       "operation": {
         "multiple": true,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "\"",
@@ -202,12 +202,16 @@
         ]
       },
       "operator": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
             "type": "=",
             "named": false
+          },
+          {
+            "type": "function_call",
+            "named": true
           }
         ]
       }
@@ -547,6 +551,72 @@
     }
   },
   {
+    "type": "function_call",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_definition",
+    "named": true,
+    "fields": {
+      "logic": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_expression",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_func",
+          "named": true
+        },
+        {
+          "type": "parameter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "group",
     "named": true,
     "fields": {},
@@ -649,6 +719,46 @@
     }
   },
   {
+    "type": "parameter",
+    "named": true,
+    "fields": {
+      "default": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "literal",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "literal",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "pipeline",
     "named": true,
     "fields": {},
@@ -675,6 +785,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "function_definition",
+          "named": true
+        },
         {
           "type": "pipeline",
           "named": true
@@ -1113,6 +1227,10 @@
     "named": false
   },
   {
+    "type": "->",
+    "named": false
+  },
+  {
     "type": ".",
     "named": false
   },
@@ -1226,6 +1344,10 @@
   },
   {
     "type": "keyword_full",
+    "named": true
+  },
+  {
+    "type": "keyword_func",
     "named": true
   },
   {
