@@ -25,7 +25,7 @@ module.exports = grammar({
             choice(
                 $.pipeline,
                 $.function_definition,
-                // $.variable,
+                $.variable,
             ),
         ),
 
@@ -63,10 +63,18 @@ module.exports = grammar({
         keyword_expanding: _ => make_keyword("expanding"),
 
         keyword_func: _ => make_keyword("func"),
+        keyword_let: _ => make_keyword("let"),
 
         pipeline: $ => seq(
             $.from,
             optional($.transforms),
+        ),
+
+        variable: $ => seq(
+            $.keyword_let,
+            field("name", $.identifier),
+            "=",
+            parens($.pipeline),
         ),
 
         function_definition: $ => seq(

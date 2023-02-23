@@ -13,6 +13,10 @@
           {
             "type": "SYMBOL",
             "name": "function_definition"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "variable"
           }
         ]
       }
@@ -149,6 +153,10 @@
       "type": "PATTERN",
       "value": "func|FUNC"
     },
+    "keyword_let": {
+      "type": "PATTERN",
+      "value": "let|LET"
+    },
     "pipeline": {
       "type": "SEQ",
       "members": [
@@ -165,6 +173,44 @@
             },
             {
               "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "variable": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_let"
+        },
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "SYMBOL",
+              "name": "pipeline"
+            },
+            {
+              "type": "STRING",
+              "value": ")"
             }
           ]
         }

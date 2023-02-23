@@ -19,6 +19,7 @@
   (keyword_rows)
   (keyword_expanding)
   (keyword_func)
+  (keyword_let)
 ] @keyword
 
 (literal) @string
@@ -117,3 +118,7 @@
 
 (function_call
   name: (identifier) @function.call)
+
+(variable
+  (keyword_let)
+  name: (identifier) @constant)

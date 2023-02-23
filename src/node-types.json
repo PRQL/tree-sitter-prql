@@ -792,6 +792,10 @@
         {
           "type": "pipeline",
           "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
         }
       ]
     }
@@ -1133,6 +1137,36 @@
     }
   },
   {
+    "type": "variable",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_let",
+          "named": true
+        },
+        {
+          "type": "pipeline",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "window",
     "named": true,
     "fields": {},
@@ -1364,6 +1398,10 @@
   },
   {
     "type": "keyword_left",
+    "named": true
+  },
+  {
+    "type": "keyword_let",
     "named": true
   },
   {
