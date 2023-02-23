@@ -61,6 +61,7 @@ module.exports = grammar({
         keyword_rolling: _ => make_keyword("rolling"),
         keyword_rows: _ => make_keyword("rows"),
         keyword_expanding: _ => make_keyword("expanding"),
+        keyword_null: _ => make_keyword("null"),
 
         keyword_func: _ => make_keyword("func"),
         keyword_let: _ => make_keyword("let"),
@@ -334,6 +335,7 @@ module.exports = grammar({
                 $._literal_string,
                 $.keyword_true,
                 $.keyword_false,
+                $.keyword_null,
             ),
         ),
 

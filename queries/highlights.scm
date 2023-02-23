@@ -80,6 +80,7 @@
  (date)
  (time)
  (timestamp)
+ (keyword_null)
 ] @attribute
 
 [

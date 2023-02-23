@@ -712,6 +712,10 @@
           "named": true
         },
         {
+          "type": "keyword_null",
+          "named": true
+        },
+        {
           "type": "keyword_true",
           "named": true
         }
@@ -1410,6 +1414,10 @@
   },
   {
     "type": "keyword_min",
+    "named": true
+  },
+  {
+    "type": "keyword_null",
     "named": true
   },
   {
