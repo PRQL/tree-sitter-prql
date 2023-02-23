@@ -22,9 +22,11 @@ module.exports = grammar({
 
     rules: {
         program: $ => repeat(
-            $.pipeline,
-            // $.function,
-            // $.variable,
+            choice(
+                $.pipeline,
+                $.function_definition,
+                // $.variable,
+            ),
         ),
 
         keyword_from: _ => make_keyword("from"),
@@ -60,9 +62,36 @@ module.exports = grammar({
         keyword_rows: _ => make_keyword("rows"),
         keyword_expanding: _ => make_keyword("expanding"),
 
+        keyword_func: _ => make_keyword("func"),
+
         pipeline: $ => seq(
             $.from,
             optional($.transforms),
+        ),
+
+        function_definition: $ => seq(
+            $.keyword_func,
+            field("name", $.identifier),
+            repeat1($.parameter),
+            "->",
+            field("logic", $.binary_expression),
+        ),
+
+        parameter: $ => choice(
+            $.identifier,
+            seq($.identifier, ":", field("default", $.literal)),
+        ),
+
+        _call_parameter: $ => choice(
+            seq($.identifier, ":", field("value", $.literal)),
+            field("value", $.literal),
+            field("value", $.identifier),
+        ),
+
+        function_call: $ => prec(2, seq(
+            field("name", $.identifier),
+            repeat1(alias($._call_parameter, $.parameter)),
+        ),
         ),
 
         transforms: $ => repeat1(
@@ -75,7 +104,7 @@ module.exports = grammar({
                 $.select,
                 $.aggregate,
                 $.group,
-            )
+            ),
         ),
 
         from: $ => seq(
@@ -316,10 +345,12 @@ module.exports = grammar({
 
         _natural_number: _ => /\d+/,
         _integer: $ => seq(optional("-"), $._natural_number),
-        _decimal_number: $ => choice(
-            seq(optional("-"), ".", $._natural_number),
-            seq($._integer, ".", $._natural_number),
-            seq($._integer, "."),
+        _decimal_number: $ => prec.left(
+            choice(
+                seq(optional("-"), ".", $._natural_number),
+                seq($._integer, ".", $._natural_number),
+                seq($._integer, "."),
+            ),
         ),
 
         field: $ => prec(1,
@@ -372,7 +403,15 @@ module.exports = grammar({
                 seq(
                     field('alias', $._expression),
                     field('operator', operator),
-                    '(',
+                    choice(
+                        field('operator', $.function_call),
+                        parens(field('operator', $.function_call)),
+                    ),
+                ),
+                seq(
+                    field('alias', $._expression),
+                    field('operator', operator),
+                    parens(
                     field('operation', seq(
                         optional(
                             choice(
@@ -382,7 +421,7 @@ module.exports = grammar({
                       ),
                       $._expression),
                     ),
-                    ')',
+                    ),
                 ),
             ),
         ))),
