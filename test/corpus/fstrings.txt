@@ -1,0 +1,24 @@
+================================================================================
+F Strings
+================================================================================
+
+from invoices
+derive name = f"{c.last_name}, {c.first_name}"
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (f_string)))))))

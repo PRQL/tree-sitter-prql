@@ -127,9 +127,10 @@ select e.first_name
       (select
         (keyword_select)
         (table_reference
-          (field
-            (identifier)
-            (identifier)))))))
+          (term
+            (field
+              (identifier)
+              (identifier))))))))
 
 ================================================================================
 Pipeline with column select
@@ -153,8 +154,7 @@ select [first_name, last_name]
         (keyword_filter)
         (binary_expression
           (field
-            (identifier))
-          (literal)))
+            (identifier))))
       (select
         (keyword_select)
         (table_reference
@@ -279,4 +279,3 @@ from employees # comment
         (field
           (identifier)))))
   (comment))
-

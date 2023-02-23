@@ -261,15 +261,17 @@ module.exports = grammar({
 
         table_reference: $ => choice(
             sq_bracket_list($.term, false),
+            $.term,
             $.field,
         ),
 
-        term: $ => prec(2,
+        term: $ => prec(3,
             seq(
                 choice(
                     field("value", $._expression),
                     field("value", $.assignment),
                     $._double_quote_string,
+                    $.f_string,
                 ),
             ),
         ),
@@ -277,6 +279,8 @@ module.exports = grammar({
         _expression: $ => prec(2,prec.left(
             choice(
                 $.field,
+                $._double_quote_string,
+                $.f_string,
                 $.date,
                 $.time,
                 $.timestamp,
@@ -296,8 +300,12 @@ module.exports = grammar({
             ),
         ),
 
-        _double_quote_string: _ => seq('"', /[^"]*/, '"'),
+        f_string: $ => seq(
+            "f",
+            $._double_quote_string,
+        ),
 
+        _double_quote_string: _ => seq('"', /[^"]*/, '"'),
 
         _literal_string: $ => prec(1,
             choice(

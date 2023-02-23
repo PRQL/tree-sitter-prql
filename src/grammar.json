@@ -1172,13 +1172,17 @@
         },
         {
           "type": "SYMBOL",
+          "name": "term"
+        },
+        {
+          "type": "SYMBOL",
           "name": "field"
         }
       ]
     },
     "term": {
       "type": "PREC",
-      "value": 2,
+      "value": 3,
       "content": {
         "type": "SEQ",
         "members": [
@@ -1204,6 +1208,10 @@
               {
                 "type": "SYMBOL",
                 "name": "_double_quote_string"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "f_string"
               }
             ]
           }
@@ -1222,6 +1230,14 @@
             {
               "type": "SYMBOL",
               "name": "field"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_double_quote_string"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "f_string"
             },
             {
               "type": "SYMBOL",
@@ -1292,6 +1308,19 @@
           }
         ]
       }
+    },
+    "f_string": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "f"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_double_quote_string"
+        }
+      ]
     },
     "_double_quote_string": {
       "type": "SEQ",

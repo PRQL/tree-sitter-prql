@@ -49,6 +49,4 @@ filter (age > 25 or department != "IT")
           (keyword_or)
           (binary_expression
             (field
-              (identifier))
-            (literal)))))))
-
+              (identifier))))))))
