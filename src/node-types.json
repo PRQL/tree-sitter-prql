@@ -87,6 +87,10 @@
           "named": true
         },
         {
+          "type": "s_string",
+          "named": true
+        },
+        {
           "type": "time",
           "named": true
         },
@@ -135,6 +139,10 @@
           },
           {
             "type": "literal",
+            "named": true
+          },
+          {
+            "type": "s_string",
             "named": true
           },
           {
@@ -189,6 +197,10 @@
           },
           {
             "type": "literal",
+            "named": true
+          },
+          {
+            "type": "s_string",
             "named": true
           },
           {
@@ -255,6 +267,10 @@
           },
           {
             "type": "literal",
+            "named": true
+          },
+          {
+            "type": "s_string",
             "named": true
           },
           {
@@ -363,6 +379,10 @@
           },
           {
             "type": "literal",
+            "named": true
+          },
+          {
+            "type": "s_string",
             "named": true
           },
           {
@@ -510,6 +530,10 @@
             "named": true
           },
           {
+            "type": "s_string",
+            "named": true
+          },
+          {
             "type": "time",
             "named": true
           },
@@ -586,6 +610,10 @@
         "types": [
           {
             "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "s_string",
             "named": true
           }
         ]
@@ -845,6 +873,10 @@
             "named": true
           },
           {
+            "type": "s_string",
+            "named": true
+          },
+          {
             "type": "time",
             "named": true
           },
@@ -901,6 +933,10 @@
             "named": true
           },
           {
+            "type": "s_string",
+            "named": true
+          },
+          {
             "type": "time",
             "named": true
           },
@@ -911,6 +947,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "s_string",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "select",
@@ -1041,6 +1082,10 @@
             "named": true
           },
           {
+            "type": "s_string",
+            "named": true
+          },
+          {
             "type": "time",
             "named": true
           },
@@ -1057,6 +1102,10 @@
       "types": [
         {
           "type": "f_string",
+          "named": true
+        },
+        {
+          "type": "s_string",
           "named": true
         }
       ]
@@ -1233,6 +1282,10 @@
     "named": false
   },
   {
+    "type": "\"\"\"",
+    "named": false
+  },
+  {
     "type": "#",
     "named": false
   },
@@ -1333,7 +1386,11 @@
     "named": false
   },
   {
-    "type": "f",
+    "type": "f\"",
+    "named": false
+  },
+  {
+    "type": "f\"\"\"",
     "named": false
   },
   {
@@ -1467,6 +1524,14 @@
   {
     "type": "keyword_window",
     "named": true
+  },
+  {
+    "type": "s\"",
+    "named": false
+  },
+  {
+    "type": "s\"\"\"",
+    "named": false
   },
   {
     "type": "|",
