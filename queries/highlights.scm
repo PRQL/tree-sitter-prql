@@ -24,6 +24,9 @@
 
 (literal) @string
 
+(f_string) @string.special
+(s_string) @string.special
+
 (comment) @comment
 
 (keyword_func) @function

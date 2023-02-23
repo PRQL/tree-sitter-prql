@@ -83,7 +83,7 @@ module.exports = grammar({
             field("name", $.identifier),
             repeat1($.parameter),
             "->",
-            field("logic", $.binary_expression),
+            field("logic", choice($.binary_expression, $.s_string)),
         ),
 
         parameter: $ => choice(
@@ -310,6 +310,7 @@ module.exports = grammar({
                     field("value", $.assignment),
                     $._double_quote_string,
                     $.f_string,
+                    $.s_string,
                 ),
             ),
         ),
@@ -319,6 +320,7 @@ module.exports = grammar({
                 $.field,
                 $._double_quote_string,
                 $.f_string,
+                $.s_string,
                 $.date,
                 $.time,
                 $.timestamp,
@@ -339,12 +341,22 @@ module.exports = grammar({
             ),
         ),
 
-        f_string: $ => seq(
-            "f",
-            $._double_quote_string,
+        f_string: $ => choice(
+            $._double_f_string,
+            $._triple_f_string,
+        ),
+
+        s_string: $ => choice(
+            $._double_s_string,
+            $._triple_s_string,
         ),
 
         _double_quote_string: _ => seq('"', /[^"]*/, '"'),
+
+        _double_f_string: _ => seq('f"', /[^"]*/, '"'),
+        _triple_f_string: _ => seq('f"""', /[^"]*/, '"""'),
+        _double_s_string: _ => seq('s"', /[^"]*/, '"'),
+        _triple_s_string: _ => seq('s"""', /[^"]*/, '"""'),
 
         _literal_string: $ => prec(1,
             choice(

@@ -22,3 +22,45 @@ derive name = f"{c.last_name}, {c.first_name}"
             (field
               (identifier))
             (f_string)))))))
+
+================================================================================
+S Strings
+================================================================================
+
+from my_table
+select db_version = s"version()"
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (select
+        (keyword_select)
+        (table_reference
+          (term
+            (assignment
+              (field
+                (identifier))
+              (s_string))))))))
+
+================================================================================
+S Strings functions
+================================================================================
+
+func average column -> s"AVG({column})"
+
+--------------------------------------------------------------------------------
+
+(program
+  (function_definition
+    (keyword_func)
+    (identifier)
+    (parameter
+      (identifier))
+    (s_string)))
