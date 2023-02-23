@@ -1,0 +1,48 @@
+================================================================================
+Variables
+================================================================================
+
+let top_50 = (
+  from employees
+  sort salary
+  take 50
+  aggregate [total_salary = sum salary]
+)
+
+from top_50
+
+--------------------------------------------------------------------------------
+
+(program
+  (variable
+    (keyword_let)
+    (identifier)
+    (pipeline
+      (from
+        (keyword_from)
+        (term
+          (field
+            (identifier))))
+      (transforms
+        (sorts
+          (keyword_sort)
+          (term
+            (field
+              (identifier))))
+        (takes
+          (keyword_take)
+          (literal))
+        (aggregate
+          (keyword_aggregate)
+          (assignment
+            (field
+              (identifier))
+            (keyword_sum)
+            (field
+              (identifier)))))))
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))))
