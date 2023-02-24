@@ -1,0 +1,54 @@
+================================================================================
+PRQL Version
+================================================================================
+
+prql version:"0.5"
+
+from employees
+
+--------------------------------------------------------------------------------
+
+(program
+  (prql
+    (keyword_prql)
+    (keyword_version)
+    (literal))
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))))
+
+================================================================================
+PRQL target
+================================================================================
+
+prql target:sql.postgres
+
+from employees
+sort age
+take 10
+
+--------------------------------------------------------------------------------
+
+(program
+  (prql
+    (keyword_prql)
+    (keyword_target)
+    (target))
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (sorts
+        (keyword_sort)
+        (term
+          (field
+            (identifier))))
+      (takes
+        (keyword_take)
+        (literal)))))

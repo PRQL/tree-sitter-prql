@@ -2,24 +2,41 @@
   "name": "prql",
   "rules": {
     "program": {
-      "type": "REPEAT",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "pipeline"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "function_definition"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "variable"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "prql"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "pipeline"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "function_definition"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "variable"
+              }
+            ]
           }
-        ]
-      }
+        }
+      ]
     },
     "keyword_from": {
       "type": "PATTERN",
@@ -160,6 +177,128 @@
     "keyword_let": {
       "type": "PATTERN",
       "value": "let|LET"
+    },
+    "keyword_prql": {
+      "type": "PATTERN",
+      "value": "prql|PRQL"
+    },
+    "keyword_version": {
+      "type": "PATTERN",
+      "value": "version|VERSION"
+    },
+    "keyword_target": {
+      "type": "PATTERN",
+      "value": "target|TARGET"
+    },
+    "prql": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_prql"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "keyword_version"
+                },
+                {
+                  "type": "STRING",
+                  "value": ":"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "version",
+                  "content": {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_double_quote_string"
+                    },
+                    "named": true,
+                    "value": "literal"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "keyword_target"
+                },
+                {
+                  "type": "STRING",
+                  "value": ":"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "target",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "target"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "target": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "sql.ansi"
+        },
+        {
+          "type": "STRING",
+          "value": "sql.bigquery"
+        },
+        {
+          "type": "STRING",
+          "value": "sql.clickhouse"
+        },
+        {
+          "type": "STRING",
+          "value": "sql.generic"
+        },
+        {
+          "type": "STRING",
+          "value": "sql.hive"
+        },
+        {
+          "type": "STRING",
+          "value": "sql.mssql"
+        },
+        {
+          "type": "STRING",
+          "value": "sql.mysql"
+        },
+        {
+          "type": "STRING",
+          "value": "sql.postgres"
+        },
+        {
+          "type": "STRING",
+          "value": "sql.sqlite"
+        },
+        {
+          "type": "STRING",
+          "value": "sql.snowflake"
+        },
+        {
+          "type": "STRING",
+          "value": "sql.duckdb"
+        }
+      ]
     },
     "pipeline": {
       "type": "SEQ",

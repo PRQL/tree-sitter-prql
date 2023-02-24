@@ -21,11 +21,14 @@ module.exports = grammar({
     ],
 
     rules: {
-        program: $ => repeat(
-            choice(
-                $.pipeline,
-                $.function_definition,
-                $.variable,
+        program: $ => seq(
+            optional($.prql),
+            repeat(
+                choice(
+                    $.pipeline,
+                    $.function_definition,
+                    $.variable,
+                ),
             ),
         ),
 
@@ -65,6 +68,39 @@ module.exports = grammar({
 
         keyword_func: _ => make_keyword("func"),
         keyword_let: _ => make_keyword("let"),
+        keyword_prql: _ => make_keyword("prql"),
+        keyword_version: _ => make_keyword("version"),
+        keyword_target: _ => make_keyword("target"),
+
+        prql: $ => seq(
+            $.keyword_prql,
+            choice(
+                seq(
+                    $.keyword_version,
+                    ":",
+                    field("version", alias($._double_quote_string, $.literal)),
+                ),
+                seq(
+                    $.keyword_target,
+                    ":",
+                    field("target", $.target),
+                ),
+            ),
+        ),
+
+        target: $ => choice(
+            "sql.ansi",
+            "sql.bigquery",
+            "sql.clickhouse",
+            "sql.generic",
+            "sql.hive",
+            "sql.mssql",
+            "sql.mysql",
+            "sql.postgres",
+            "sql.sqlite",
+            "sql.snowflake",
+            "sql.duckdb",
+        ),
 
         pipeline: $ => seq(
             $.from,
