@@ -1,0 +1,82 @@
+================================================================================
+Switch #1
+================================================================================
+
+from employees
+derive distance = switch [
+  city == "Calgary" -> 0,
+  city == "Edmonton" -> 300,
+]
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (switch
+              (keyword_switch)
+              (switch_condition
+                (binary_expression
+                  (field
+                    (identifier)))
+                (literal))
+              (switch_condition
+                (binary_expression
+                  (field
+                    (identifier)))
+                (literal)))))))))
+
+================================================================================
+Switch with default
+================================================================================
+
+from employees
+derive distance = switch [
+  city == "Calgary" -> 0,
+  city == "Edmonton" -> 300,
+  true -> "Unknown",
+]
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (switch
+              (keyword_switch)
+              (switch_condition
+                (binary_expression
+                  (field
+                    (identifier)))
+                (literal))
+              (switch_condition
+                (binary_expression
+                  (field
+                    (identifier)))
+                (literal))
+              (switch_condition
+                (literal
+                  (keyword_true))
+                (literal)))))))))
