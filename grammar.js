@@ -22,7 +22,7 @@ module.exports = grammar({
 
     rules: {
         program: $ => seq(
-            optional($.prql),
+            repeat($.prql),
             repeat(
                 choice(
                     $.pipeline,
