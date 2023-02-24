@@ -295,12 +295,37 @@
         }
       ]
     },
+    "keyword_from_text": {
+      "type": "PATTERN",
+      "value": "from_text|FROM_TEXT"
+    },
+    "keyword_format": {
+      "type": "PATTERN",
+      "value": "format|FORMAT"
+    },
+    "keyword_csv": {
+      "type": "PATTERN",
+      "value": "csv|CSV"
+    },
+    "keyword_json": {
+      "type": "PATTERN",
+      "value": "json|JSON"
+    },
     "pipeline": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "from"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "from"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "from_text"
+            }
+          ]
         },
         {
           "type": "CHOICE",
@@ -336,19 +361,45 @@
           "value": "="
         },
         {
-          "type": "SEQ",
+          "type": "CHOICE",
           "members": [
             {
-              "type": "STRING",
-              "value": "("
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "("
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "pipeline"
+                },
+                {
+                  "type": "STRING",
+                  "value": ")"
+                }
+              ]
             },
             {
-              "type": "SYMBOL",
-              "name": "pipeline"
-            },
-            {
-              "type": "STRING",
-              "value": ")"
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "from_text"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "transforms"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         }
@@ -499,6 +550,58 @@
           }
         ]
       }
+    },
+    "from_text": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_from_text"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "keyword_format"
+                },
+                {
+                  "type": "STRING",
+                  "value": ":"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "keyword_csv"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "keyword_json"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_triple_quote_string"
+          },
+          "named": true,
+          "value": "literal"
+        }
+      ]
     },
     "transforms": {
       "type": "REPEAT1",
@@ -1818,6 +1921,35 @@
         }
       ]
     },
+    "_inner_triple_quotes": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": ".|\\n|\\r"
+          }
+        ]
+      }
+    },
+    "_triple_quote_string": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "\"\"\""
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_inner_triple_quotes"
+        },
+        {
+          "type": "STRING",
+          "value": "\"\"\""
+        }
+      ]
+    },
     "_double_f_string": {
       "type": "SEQ",
       "members": [
@@ -1843,8 +1975,8 @@
           "value": "f\"\"\""
         },
         {
-          "type": "PATTERN",
-          "value": "[^\"]*"
+          "type": "SYMBOL",
+          "name": "_inner_triple_quotes"
         },
         {
           "type": "STRING",
@@ -1877,8 +2009,8 @@
           "value": "s\"\"\""
         },
         {
-          "type": "PATTERN",
-          "value": "[^\"]*"
+          "type": "SYMBOL",
+          "name": "_inner_triple_quotes"
         },
         {
           "type": "STRING",

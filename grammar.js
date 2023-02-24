@@ -101,9 +101,16 @@ module.exports = grammar({
             "sql.snowflake",
             "sql.duckdb",
         ),
+        keyword_from_text: _ => make_keyword("from_text"),
+        keyword_format: _ => make_keyword("format"),
+        keyword_csv: _ => make_keyword("csv"),
+        keyword_json: _ => make_keyword("json"),
 
         pipeline: $ => seq(
-            $.from,
+            choice(
+                $.from,
+                $.from_text,
+            ),
             optional($.transforms),
         ),
 
@@ -111,7 +118,13 @@ module.exports = grammar({
             $.keyword_let,
             field("name", $.identifier),
             "=",
-            parens($.pipeline),
+            choice(
+                parens($.pipeline),
+                seq(
+                    $.from_text,
+                    optional($.transforms),
+                ),
+            ),
         ),
 
         function_definition: $ => seq(
@@ -133,10 +146,26 @@ module.exports = grammar({
             field("value", $.identifier),
         ),
 
-        function_call: $ => prec(2, seq(
-            field("name", $.identifier),
-            repeat1(alias($._call_parameter, $.parameter)),
+        function_call: $ => prec(2, 
+            seq(
+                field("name", $.identifier),
+                repeat1(alias($._call_parameter, $.parameter)),
+            ),
         ),
+
+        from_text: $ => seq(
+            $.keyword_from_text,
+            optional(
+                seq(
+                    $.keyword_format,
+                    ":",
+                    choice(
+                        $.keyword_csv,
+                        $.keyword_json,
+                    )
+                ),
+            ),
+            alias($._triple_quote_string, $.literal),
         ),
 
         transforms: $ => repeat1(
@@ -404,10 +433,13 @@ module.exports = grammar({
 
         _double_quote_string: _ => seq('"', /[^"]*/, '"'),
 
+        _inner_triple_quotes: _ => repeat1(choice(/.|\n|\r/)),
+        _triple_quote_string: $ => seq('"""', $._inner_triple_quotes, '"""'),
+
         _double_f_string: _ => seq('f"', /[^"]*/, '"'),
-        _triple_f_string: _ => seq('f"""', /[^"]*/, '"""'),
+        _triple_f_string: $ => seq('f"""', $._inner_triple_quotes, '"""'),
         _double_s_string: _ => seq('s"', /[^"]*/, '"'),
-        _triple_s_string: _ => seq('s"""', /[^"]*/, '"""'),
+        _triple_s_string: $ => seq('s"""', $._inner_triple_quotes, '"""'),
 
         _literal_string: $ => prec(1,
             choice(
