@@ -279,3 +279,233 @@ from employees # comment
         (field
           (identifier)))))
   (comment))
+
+================================================================================
+Basic Example
+================================================================================
+from employees
+select [id, first_name, age]
+sort age
+take 10
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (select
+        (keyword_select)
+        (table_reference
+          (term
+            (field
+              (identifier)))
+          (term
+            (field
+              (identifier)))
+          (term
+            (field
+              (identifier)))))
+      (sorts
+        (keyword_sort)
+        (term
+          (field
+            (identifier))))
+      (takes
+        (keyword_take)
+        (literal)))))
+
+================================================================================
+Expressions
+================================================================================
+from track_plays
+derive [
+  finished = started + unfinished,
+  fin_share = finished / started,        # Use previous definitions
+  fin_ratio = fin_share / (1-fin_share), # BTW, hanging commas are optional!
+]
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (binary_expression
+              (field
+                (identifier))
+              (field
+                (identifier)))))
+        (term
+          (assignment
+            (field
+              (identifier))
+            (binary_expression
+              (field
+                (identifier))
+              (field
+                (identifier)))))
+        (comment)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (binary_expression
+              (field
+                (identifier))
+              (binary_expression
+                (literal)
+                (field
+                  (identifier))))))
+        (comment)))))
+
+================================================================================
+Expressions
+================================================================================
+from employees
+group role (
+  sort join_date
+  take 1
+)
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (group
+        (keyword_group)
+        (term
+          (field
+            (identifier)))
+        (sorts
+          (keyword_sort)
+          (term
+            (field
+              (identifier))))
+        (takes
+          (keyword_take)
+          (literal))))))
+
+================================================================================
+Joins
+================================================================================
+from employees
+join b=benefits [==employee_id]
+join side:left p=positions [p.id==employees.employee_id]
+select [employees.employee_id, p.role, b.vision_coverage]
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (joins
+        (keyword_join)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (field
+              (identifier))))
+        (conditions
+          (term
+            (field
+              (identifier)))))
+      (joins
+        (keyword_join)
+        (keyword_side)
+        (keyword_left)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (field
+              (identifier))))
+        (conditions
+          (binary_expression
+            (field
+              (identifier)
+              (identifier))
+            (field
+              (identifier)
+              (identifier)))))
+      (select
+        (keyword_select)
+        (table_reference
+          (term
+            (field
+              (identifier)
+              (identifier)))
+          (term
+            (field
+              (identifier)
+              (identifier)))
+          (term
+            (field
+              (identifier)
+              (identifier))))))))
+
+================================================================================
+Null handling
+================================================================================
+from users
+filter last_login != null
+filter deleted_at == null
+derive channel = channel ?? "unknown"
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (filter
+        (keyword_filter)
+        (binary_expression
+          (field
+            (identifier))
+          (literal
+            (keyword_null))))
+      (filter
+        (keyword_filter)
+        (binary_expression
+          (field
+            (identifier))
+          (literal
+            (keyword_null))))
+      (derives
+        (keyword_derive)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (binary_expression
+              (field
+                (identifier)))))))))
