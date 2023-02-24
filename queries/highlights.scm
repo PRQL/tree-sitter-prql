@@ -21,6 +21,7 @@
   (keyword_func)
   (keyword_let)
   (keyword_prql)
+  (keyword_switch)
 ] @keyword
 
 (literal) @string

@@ -224,6 +224,10 @@
           {
             "type": "function_call",
             "named": true
+          },
+          {
+            "type": "switch",
+            "named": true
           }
         ]
       }
@@ -1044,6 +1048,61 @@
     }
   },
   {
+    "type": "switch",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_switch",
+          "named": true
+        },
+        {
+          "type": "switch_condition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "switch_condition",
+    "named": true,
+    "fields": {
+      "default": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "literal",
+            "named": true
+          }
+        ]
+      },
+      "result": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "literal",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "table_reference",
     "named": true,
     "fields": {},
@@ -1568,6 +1627,10 @@
   },
   {
     "type": "keyword_sum",
+    "named": true
+  },
+  {
+    "type": "keyword_switch",
     "named": true
   },
   {

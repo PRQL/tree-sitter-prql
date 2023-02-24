@@ -187,6 +187,21 @@ module.exports = grammar({
             ),
         ),
 
+        switch: $ => seq(
+            $.keyword_switch,
+            sq_bracket_list(repeat1($.switch_condition)),
+        ),
+
+        switch_condition: $ => seq(
+            choice(
+                $.binary_expression,
+                field("default", $.literal),
+            ),
+            "->",
+            field("result", $.literal),
+            ',',
+        ),
+
         aggregate: $ => seq(
             $.keyword_aggregate,
             sq_bracket_list(
@@ -465,6 +480,11 @@ module.exports = grammar({
                         field('operator', $.function_call),
                         parens(field('operator', $.function_call)),
                     ),
+                ),
+                seq(
+                    field('alias', $._expression),
+                    field('operator', operator),
+                    field('operator', $.switch),
                 ),
                 seq(
                     field('alias', $._expression),
