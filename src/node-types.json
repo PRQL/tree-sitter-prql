@@ -826,7 +826,55 @@
           "named": true
         },
         {
+          "type": "prql",
+          "named": true
+        },
+        {
           "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "prql",
+    "named": true,
+    "fields": {
+      "target": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "target",
+            "named": true
+          }
+        ]
+      },
+      "version": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "literal",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_prql",
+          "named": true
+        },
+        {
+          "type": "keyword_target",
+          "named": true
+        },
+        {
+          "type": "keyword_version",
           "named": true
         }
       ]
@@ -1036,6 +1084,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "target",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "term",
@@ -1482,6 +1535,10 @@
     "named": true
   },
   {
+    "type": "keyword_prql",
+    "named": true
+  },
+  {
     "type": "keyword_right",
     "named": true
   },
@@ -1518,7 +1575,15 @@
     "named": true
   },
   {
+    "type": "keyword_target",
+    "named": true
+  },
+  {
     "type": "keyword_true",
+    "named": true
+  },
+  {
+    "type": "keyword_version",
     "named": true
   },
   {
@@ -1531,6 +1596,50 @@
   },
   {
     "type": "s\"\"\"",
+    "named": false
+  },
+  {
+    "type": "sql.ansi",
+    "named": false
+  },
+  {
+    "type": "sql.bigquery",
+    "named": false
+  },
+  {
+    "type": "sql.clickhouse",
+    "named": false
+  },
+  {
+    "type": "sql.duckdb",
+    "named": false
+  },
+  {
+    "type": "sql.generic",
+    "named": false
+  },
+  {
+    "type": "sql.hive",
+    "named": false
+  },
+  {
+    "type": "sql.mssql",
+    "named": false
+  },
+  {
+    "type": "sql.mysql",
+    "named": false
+  },
+  {
+    "type": "sql.postgres",
+    "named": false
+  },
+  {
+    "type": "sql.snowflake",
+    "named": false
+  },
+  {
+    "type": "sql.sqlite",
     "named": false
   },
   {

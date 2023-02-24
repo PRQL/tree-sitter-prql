@@ -20,6 +20,7 @@
   (keyword_expanding)
   (keyword_func)
   (keyword_let)
+  (keyword_prql)
 ] @keyword
 
 (literal) @string
@@ -28,11 +29,6 @@
 (s_string) @string.special
 
 (comment) @comment
-
-(keyword_func) @function
-
-(function_call
-  (identifier)) @function.call
 
 [
   "+"
@@ -80,11 +76,21 @@
 
 [
  (keyword_side)
+ (keyword_version)
+ (keyword_target)
  (date)
  (time)
  (timestamp)
  (keyword_null)
 ] @attribute
+
+(target) @function.builtin
+
+ [
+  (date)
+  (time)
+  (timestamp)
+] @string.special
 
 [
  (keyword_left)
