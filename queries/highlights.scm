@@ -31,6 +31,11 @@
 
 (comment) @comment
 
+(keyword_func) @function
+
+(function_call
+  (identifier)) @function.call
+
 [
   "+"
   "-"
@@ -65,24 +70,22 @@
 (#lua-match? @float "^[+-]?%d*\.%d*$"))
 
 [
- (keyword_min)
- (keyword_max)
- (keyword_count)
- (keyword_count_distinct)
- (keyword_average)
- (keyword_avg)
- (keyword_sum)
- (keyword_stddev)
+  (keyword_min)
+  (keyword_max)
+  (keyword_count)
+  (keyword_count_distinct)
+  (keyword_average)
+  (keyword_avg)
+  (keyword_sum)
+  (keyword_stddev)
 ] @function.call
 
 [
  (keyword_side)
  (keyword_version)
  (keyword_target)
- (date)
- (time)
- (timestamp)
  (keyword_null)
+ (keyword_format)
 ] @attribute
 
 (target) @function.builtin
@@ -94,12 +97,17 @@
 ] @string.special
 
 [
- (keyword_left)
+  (keyword_left)
+  (keyword_inner)
+  (keyword_right)
+  (keyword_full)
+  (keyword_csv)
+  (keyword_json)
 ] @method
 
 [
- (keyword_true)
- (keyword_false)
+  (keyword_true)
+  (keyword_false)
 ] @boolean
 
 (term

@@ -1,0 +1,145 @@
+================================================================================
+From text default
+================================================================================
+
+from_text """
+a,b,c
+1,2,3
+4,5,6
+"""
+derive [
+    d = b + c,
+    answer = 20 * 2 + 2,
+]
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from_text
+      (keyword_from_text)
+      (literal))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (binary_expression
+              (field
+                (identifier))
+              (field
+                (identifier)))))
+        (term
+          (assignment
+            (field
+              (identifier))
+            (binary_expression
+              (literal)
+              (binary_expression
+                (literal)
+                (literal)))))))))
+
+================================================================================
+From text csv
+================================================================================
+
+from_text format: csv """
+a,b,c
+1,2,3
+4,5,6
+"""
+derive [
+    d = b + c,
+    answer = 20 * 2 + 2,
+]
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from_text
+      (keyword_from_text)
+      (keyword_format)
+      (keyword_csv)
+      (literal))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (binary_expression
+              (field
+                (identifier))
+              (field
+                (identifier)))))
+        (term
+          (assignment
+            (field
+              (identifier))
+            (binary_expression
+              (literal)
+              (binary_expression
+                (literal)
+                (literal)))))))))
+
+================================================================================
+From text json
+================================================================================
+
+let x = from_text format:json """{
+    "columns": ["a", "b", "c"],
+    "data": [
+        [1, "x", false],
+        [4, "y", null]
+    ]
+}"""
+
+let y = from_text format:json """
+    [
+        {"a": 1, "m": "5"},
+        {"a": 4, "n": "6"}
+    ]
+"""
+
+from x 
+join y [==a]
+
+--------------------------------------------------------------------------------
+
+(program
+  (variable
+    (keyword_let)
+    (identifier)
+    (from_text
+      (keyword_from_text)
+      (keyword_format)
+      (keyword_json)
+      (literal)))
+  (variable
+    (keyword_let)
+    (identifier)
+    (from_text
+      (keyword_from_text)
+      (keyword_format)
+      (keyword_json)
+      (literal)))
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (joins
+        (keyword_join)
+        (term
+          (field
+            (identifier)))
+        (conditions
+          (term
+            (field
+              (identifier))))))))

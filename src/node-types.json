@@ -579,6 +579,37 @@
     }
   },
   {
+    "type": "from_text",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_csv",
+          "named": true
+        },
+        {
+          "type": "keyword_format",
+          "named": true
+        },
+        {
+          "type": "keyword_from_text",
+          "named": true
+        },
+        {
+          "type": "keyword_json",
+          "named": true
+        },
+        {
+          "type": "literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "function_call",
     "named": true,
     "fields": {
@@ -804,6 +835,10 @@
       "types": [
         {
           "type": "from",
+          "named": true
+        },
+        {
+          "type": "from_text",
           "named": true
         },
         {
@@ -1321,11 +1356,19 @@
       "required": true,
       "types": [
         {
+          "type": "from_text",
+          "named": true
+        },
+        {
           "type": "keyword_let",
           "named": true
         },
         {
           "type": "pipeline",
+          "named": true
+        },
+        {
+          "type": "transforms",
           "named": true
         }
       ]
@@ -1530,6 +1573,10 @@
     "named": true
   },
   {
+    "type": "keyword_csv",
+    "named": true
+  },
+  {
     "type": "keyword_derive",
     "named": true
   },
@@ -1546,7 +1593,15 @@
     "named": true
   },
   {
+    "type": "keyword_format",
+    "named": true
+  },
+  {
     "type": "keyword_from",
+    "named": true
+  },
+  {
+    "type": "keyword_from_text",
     "named": true
   },
   {
@@ -1567,6 +1622,10 @@
   },
   {
     "type": "keyword_join",
+    "named": true
+  },
+  {
+    "type": "keyword_json",
     "named": true
   },
   {
