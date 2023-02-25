@@ -85,6 +85,18 @@
       "type": "PATTERN",
       "value": "switch|SWITCH"
     },
+    "keyword_append": {
+      "type": "PATTERN",
+      "value": "append|APPEND"
+    },
+    "keyword_remove": {
+      "type": "PATTERN",
+      "value": "remove|REMOVE"
+    },
+    "keyword_intersect": {
+      "type": "PATTERN",
+      "value": "intersect|INTERSECT"
+    },
     "keyword_average": {
       "type": "PATTERN",
       "value": "average|AVERAGE"
@@ -639,6 +651,10 @@
           {
             "type": "SYMBOL",
             "name": "group"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "append"
           }
         ]
       }
@@ -820,6 +836,32 @@
               ]
             }
           ]
+        }
+      ]
+    },
+    "append": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "keyword_append"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "keyword_remove"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "keyword_intersect"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_table_selection"
         }
       ]
     },

@@ -45,6 +45,9 @@ module.exports = grammar({
         keyword_true: _ => make_keyword("true"),
         keyword_false: _ => make_keyword("false"),
         keyword_switch: _ => make_keyword("switch"),
+        keyword_append: _ => make_keyword("append"),
+        keyword_remove: _ => make_keyword("remove"),
+        keyword_intersect: _ => make_keyword("intersect"),
         keyword_average: _ => make_keyword("average"),
         keyword_min: _ => make_keyword("min"),
         keyword_max: _ => make_keyword("max"),
@@ -178,6 +181,7 @@ module.exports = grammar({
                 $.select,
                 $.aggregate,
                 $.group,
+                $.append,
             ),
         ),
 
@@ -212,6 +216,15 @@ module.exports = grammar({
                     false
                 ),
             )
+        ),
+
+        append: $ => seq(
+            choice(
+                $.keyword_append,
+                $.keyword_remove,
+                $.keyword_intersect,
+            ),
+            $._table_selection,
         ),
 
         filter: $ => seq(

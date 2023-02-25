@@ -102,6 +102,50 @@
     }
   },
   {
+    "type": "append",
+    "named": true,
+    "fields": {
+      "alias": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "table_reference": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_append",
+          "named": true
+        },
+        {
+          "type": "keyword_intersect",
+          "named": true
+        },
+        {
+          "type": "keyword_remove",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "assignment",
     "named": true,
     "fields": {
@@ -1267,6 +1311,10 @@
           "named": true
         },
         {
+          "type": "append",
+          "named": true
+        },
+        {
           "type": "derives",
           "named": true
         },
@@ -1530,6 +1578,10 @@
     "named": true
   },
   {
+    "type": "keyword_append",
+    "named": true
+  },
+  {
     "type": "keyword_average",
     "named": true
   },
@@ -1594,6 +1646,10 @@
     "named": true
   },
   {
+    "type": "keyword_intersect",
+    "named": true
+  },
+  {
     "type": "keyword_join",
     "named": true
   },
@@ -1627,6 +1683,10 @@
   },
   {
     "type": "keyword_prql",
+    "named": true
+  },
+  {
+    "type": "keyword_remove",
     "named": true
   },
   {

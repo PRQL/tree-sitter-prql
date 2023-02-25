@@ -22,6 +22,9 @@
   (keyword_let)
   (keyword_prql)
   (keyword_switch)
+  (keyword_append)
+  (keyword_remove)
+  (keyword_intersect)
 ] @keyword
 
 (literal) @string
