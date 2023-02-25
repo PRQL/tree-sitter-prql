@@ -11,9 +11,7 @@ filter age > 25
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (filter
         (keyword_filter)
@@ -36,9 +34,7 @@ filter (age > 25 or department != "IT")
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (filter
         (keyword_filter)
@@ -51,4 +47,5 @@ filter (age > 25 or department != "IT")
           (keyword_or)
           (binary_expression
             (field
-              (identifier))))))))
+              (identifier))
+            (literal)))))))

@@ -11,9 +11,7 @@ derive order <  @2022-12-31
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -36,9 +34,7 @@ derive order <  @16:54:32.123456
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -62,9 +58,7 @@ derive order <  @16
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -87,9 +81,7 @@ derive order <  @16:32
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -112,9 +104,7 @@ derive order <  @16:32:45
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -137,9 +127,7 @@ derive order <  @2022-12-31T16:54:32.123456
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -163,9 +151,7 @@ derive order <  @2022-12-31T16:54:32.123456Z
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -190,9 +176,7 @@ derive order <  @2022-12-31T16:54:32.123456+02
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -218,9 +202,7 @@ derive order <  @2022-12-31T16:54:32.123456-02
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)

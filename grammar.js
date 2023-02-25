@@ -183,7 +183,20 @@ module.exports = grammar({
 
         from: $ => seq(
             $.keyword_from,
-            $.term,
+            $._table_selection,
+        ),
+
+        _table_selection: $ => choice(
+            $._table_reference,
+            seq(
+                field("alias", $.identifier),
+                "=",
+                $._table_reference,
+            ),
+        ),
+
+        _table_reference: $ => choice(
+                field("table_reference", $.identifier),
         ),
 
         derives: $ => seq(
@@ -191,11 +204,9 @@ module.exports = grammar({
             choice(
                 $.term,
                 $.assignment,
-                $.binary_expression,
                 sq_bracket_list(
                     choice(
                         $.term,
-                        $.binary_expression,
                         seq('(', $.binary_expression, ')'),
                     ),
                     false
@@ -264,22 +275,16 @@ module.exports = grammar({
         sorts: $ => seq(
             $.keyword_sort,
             choice(
-                sq_bracket_list(
-                    seq(
-                        optional(
-                            $.direction,
-                        ),
-                        $.term,
-                    ),
-                    false
-                ),
-                seq(
-                    optional(
-                        $.direction,
-                    ),
-                    $.term,
-                ),
+                sq_bracket_list($._sort_instruction, false),
+                $._sort_instruction,
             ),
+        ),
+
+        _sort_instruction: $ => seq(
+            optional(
+                $.direction,
+            ),
+            $.identifier,
         ),
 
         direction: $ => prec.left (
@@ -318,7 +323,7 @@ module.exports = grammar({
             ':',
             choice(
                 $.range,
-                alias($.integer, $.literal),
+                $.integer,
             )
         ),
 
@@ -344,7 +349,7 @@ module.exports = grammar({
             $.keyword_join,
             seq(
                 optional($._join_definition),
-                $.term,
+                field("table", alias($._table_selection, $.term)),
                 optional($.conditions),
             ),
         ),
@@ -374,31 +379,23 @@ module.exports = grammar({
 
         select: $ => seq(
             $.keyword_select,
-            $.table_reference,
+            choice(
+                sq_bracket_list($.term, false),
+                seq($.bang, sq_bracket_list($.term, false)),
+                $.term,
+            ),
         ),
 
-        table_reference: $ => choice(
-            sq_bracket_list($.term, false),
-            $.term,
-            $.field,
-        ),
-
-        term: $ => prec(3,
-            seq(
-                choice(
-                    field("value", $._expression),
-                    field("value", $.assignment),
-                    $._double_quote_string,
-                    $.f_string,
-                    $.s_string,
-                ),
+        term: $ => prec(1,
+            choice(
+                field("value", $._expression),
+                field("value", $.assignment),
             ),
         ),
 
         _expression: $ => prec(2,prec.left(
             choice(
                 $.field,
-                $._double_quote_string,
                 $.f_string,
                 $.s_string,
                 $.date,
@@ -432,6 +429,7 @@ module.exports = grammar({
         ),
 
         _double_quote_string: _ => seq('"', /[^"]*/, '"'),
+        _single_quote_string: _ => seq("'", /[^']*/, "'"),
 
         _inner_triple_quotes: _ => repeat1(choice(/.|\n|\r/)),
         _triple_quote_string: $ => seq('"""', $._inner_triple_quotes, '"""'),
@@ -443,7 +441,7 @@ module.exports = grammar({
 
         _literal_string: $ => prec(1,
             choice(
-                seq("'", /[^']*/, "'"),
+                $._single_quote_string,
                 $._double_quote_string,
             ),
         ),
@@ -476,17 +474,42 @@ module.exports = grammar({
             alias($._double_quote_string, $.identifier),
         ),
 
-        identifier: _ => /([a-zA-Z_][0-9a-zA-Z_]*)/,
+
+        identifier: $ => choice(
+            $._identifier,
+            seq('`', $._identifier_dot, '`'),
+        ),
+        _identifier: _ => /([a-zA-Z_][0-9a-zA-Z_]*)/,
+        _identifier_dot: _ => /([a-zA-Z_.][0-9a-zA-Z_.]*)/,
 
         range:$ => choice (...[
             ['..', 'range'],
         ].map(([operator, range_prec]) =>
-            prec.left(range_prec, seq(
-              field('from', $._expression),
-              field('operator', operator),
-              field('till', $._expression)
+            prec.left(range_prec, choice(
+                seq(
+                    field('from', $.integer),
+                    field('operator', operator),
+                    field('till', $.integer),
+                ),
+                seq(
+                    field('from', $.date),
+                    field('operator', operator),
+                    field('till', $.date),
+                ),
             ))
           ),
+        ),
+
+        _agg_rhs_assignment: $ => field(
+            'operation', 
+            seq(
+                optional(
+                    choice(
+                        $.keyword_average,
+                        $.keyword_sum,
+                    ),
+                ),
+                $._expression),
         ),
 
         assignment: $ => choice(... [
@@ -496,42 +519,12 @@ module.exports = grammar({
                 seq(
                     field('alias', $._expression),
                     field('operator', operator),
-                    field('operation', seq(
-                        optional(
-                            choice(
-                                $.keyword_average,
-                                $.keyword_sum,
-                            ),
-                      ),
-                      $._expression),
-                    ),
-                ),
-                seq(
-                    field('alias', $._expression),
-                    field('operator', operator),
                     choice(
+                        $._agg_rhs_assignment,
+                        parens($._agg_rhs_assignment),
                         field('operator', $.function_call),
                         parens(field('operator', $.function_call)),
-                    ),
-                ),
-                seq(
-                    field('alias', $._expression),
-                    field('operator', operator),
-                    field('operator', $.switch),
-                ),
-                seq(
-                    field('alias', $._expression),
-                    field('operator', operator),
-                    parens(
-                    field('operation', seq(
-                        optional(
-                            choice(
-                                $.keyword_average,
-                                $.keyword_sum,
-                            ),
-                      ),
-                      $._expression),
-                    ),
+                        field('operator', $.switch),
                     ),
                 ),
             ),

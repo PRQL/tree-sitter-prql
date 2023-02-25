@@ -27,9 +27,7 @@ derive temp_c = (fahrenheit_to_celsius temp_f)
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -82,9 +80,7 @@ derive [
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)

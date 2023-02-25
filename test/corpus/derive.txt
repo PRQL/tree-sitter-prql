@@ -11,9 +11,7 @@ derive gross_salary = salary + payroll_tax
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -43,9 +41,7 @@ derive [
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -81,9 +77,7 @@ derive gross_salary = (salary + payroll_tax)
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -113,9 +107,7 @@ derive [
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -151,9 +143,7 @@ derive x = a + (a * b)
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)

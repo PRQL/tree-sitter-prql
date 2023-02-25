@@ -10,9 +10,35 @@ from employees
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))))
+      (identifier))))
+
+================================================================================
+From with backticks
+================================================================================
+
+from `employees`
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (identifier))))
+
+================================================================================
+From with schema.table
+================================================================================
+
+from `employees.names`
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (identifier))))
 
 ================================================================================
 Simple pipeline with tansform
@@ -27,9 +53,7 @@ derive gross_salary
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -51,9 +75,7 @@ sort gross_salary
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -62,9 +84,7 @@ sort gross_salary
             (identifier))))
       (sorts
         (keyword_sort)
-        (term
-          (field
-            (identifier)))))))
+        (identifier)))))
 
 ================================================================================
 Full example CTE
@@ -81,12 +101,8 @@ take 10..100
   (pipeline
     (from
       (keyword_from)
-      (term
-        (assignment
-          (field
-            (identifier))
-          (field
-            (identifier)))))
+      (identifier)
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -95,16 +111,12 @@ take 10..100
             (identifier))))
       (sorts
         (keyword_sort)
-        (term
-          (field
-            (identifier))))
+        (identifier))
       (takes
         (keyword_take)
         (range
-          (literal
-            (integer))
-          (literal
-            (integer)))))))
+          (integer)
+          (integer))))))
 
 ================================================================================
 Pipeline with aliased column select
@@ -119,20 +131,15 @@ select e.first_name
   (pipeline
     (from
       (keyword_from)
-      (term
-        (assignment
-          (field
-            (identifier))
-          (field
-            (identifier)))))
+      (identifier)
+      (identifier))
     (transforms
       (select
         (keyword_select)
-        (table_reference
-          (term
-            (field
-              (identifier)
-              (identifier))))))))
+        (term
+          (field
+            (identifier)
+            (identifier)))))))
 
 ================================================================================
 Pipeline with column select
@@ -148,24 +155,22 @@ select [first_name, last_name]
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (filter
         (keyword_filter)
         (binary_expression
           (field
-            (identifier))))
+            (identifier))
+          (literal)))
       (select
         (keyword_select)
-        (table_reference
-          (term
-            (field
-              (identifier)))
-          (term
-            (field
-              (identifier))))))))
+        (term
+          (field
+            (identifier)))
+        (term
+          (field
+            (identifier)))))))
 
 ================================================================================
 Lists
@@ -188,9 +193,7 @@ derive [
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -251,9 +254,7 @@ aggregate [
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (aggregate
         (keyword_aggregate)
@@ -279,9 +280,7 @@ from employees # comment
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier)))))
+      (identifier)))
   (comment))
 
 ================================================================================
@@ -297,27 +296,22 @@ take 10
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (select
         (keyword_select)
-        (table_reference
-          (term
-            (field
-              (identifier)))
-          (term
-            (field
-              (identifier)))
-          (term
-            (field
-              (identifier)))))
-      (sorts
-        (keyword_sort)
+        (term
+          (field
+            (identifier)))
+        (term
+          (field
+            (identifier)))
         (term
           (field
             (identifier))))
+      (sorts
+        (keyword_sort)
+        (identifier))
       (takes
         (keyword_take)
         (integer)))))
@@ -337,9 +331,7 @@ derive [
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -389,9 +381,7 @@ filter salary >= 1000_000
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (filter
         (keyword_filter)
@@ -417,9 +407,7 @@ group role (
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (group
         (keyword_group)
@@ -428,9 +416,7 @@ group role (
             (identifier)))
         (sorts
           (keyword_sort)
-          (term
-            (field
-              (identifier))))
+          (identifier))
         (takes
           (keyword_take)
           (integer))))))
@@ -449,18 +435,13 @@ select [employees.employee_id, p.role, b.vision_coverage]
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (joins
         (keyword_join)
         (term
-          (assignment
-            (field
-              (identifier))
-            (field
-              (identifier))))
+          (identifier)
+          (identifier))
         (conditions
           (term
             (field
@@ -470,11 +451,8 @@ select [employees.employee_id, p.role, b.vision_coverage]
         (keyword_side)
         (keyword_left)
         (term
-          (assignment
-            (field
-              (identifier))
-            (field
-              (identifier))))
+          (identifier)
+          (identifier))
         (conditions
           (binary_expression
             (field
@@ -485,19 +463,18 @@ select [employees.employee_id, p.role, b.vision_coverage]
               (identifier)))))
       (select
         (keyword_select)
-        (table_reference
-          (term
-            (field
-              (identifier)
-              (identifier)))
-          (term
-            (field
-              (identifier)
-              (identifier)))
-          (term
-            (field
-              (identifier)
-              (identifier))))))))
+        (term
+          (field
+            (identifier)
+            (identifier)))
+        (term
+          (field
+            (identifier)
+            (identifier)))
+        (term
+          (field
+            (identifier)
+            (identifier)))))))
 
 ================================================================================
 Null handling
@@ -513,9 +490,7 @@ derive channel = channel ?? "unknown"
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (filter
         (keyword_filter)
@@ -539,4 +514,5 @@ derive channel = channel ?? "unknown"
               (identifier))
             (binary_expression
               (field
-                (identifier)))))))))
+                (identifier))
+              (literal))))))))
