@@ -149,7 +149,7 @@ module.exports = grammar({
             field("value", $.identifier),
         ),
 
-        function_call: $ => prec(2, 
+        function_call: $ => prec(1, 
             seq(
                 field("name", $.identifier),
                 repeat1(alias($._call_parameter, $.parameter)),
@@ -267,16 +267,18 @@ module.exports = grammar({
             ),
         ),
 
+        _agg_keywords: $ => choice(
+            $.keyword_min,
+            $.keyword_max,
+            $.keyword_count_distinct,
+            $.keyword_average,
+            $.keyword_avg,
+            $.keyword_sum,
+            $.keyword_stddev,
+        ),
+
         aggregate_operation: $ => seq(
-            choice(
-                $.keyword_min,
-                $.keyword_max,
-                $.keyword_count_distinct,
-                $.keyword_average,
-                $.keyword_avg,
-                $.keyword_sum,
-                $.keyword_stddev,
-            ),
+            $._agg_keywords,
             $._expression,
         ),
 
@@ -470,7 +472,7 @@ module.exports = grammar({
             ),
         ),
 
-        field: $ => prec(1,
+        field: $ => prec(2,
             seq(
                 optional(
                     seq(
@@ -513,16 +515,14 @@ module.exports = grammar({
           ),
         ),
 
-        _agg_rhs_assignment: $ => field(
+        _agg_rhs_assignment: $ => prec(1,field(
             'operation', 
             seq(
                 optional(
-                    choice(
-                        $.keyword_average,
-                        $.keyword_sum,
-                    ),
+                    $._agg_keywords,
                 ),
                 $._expression),
+        ),
         ),
 
         assignment: $ => choice(... [
