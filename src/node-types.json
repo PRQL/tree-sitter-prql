@@ -394,10 +394,6 @@
           {
             "type": "keyword_or",
             "named": true
-          },
-          {
-            "type": "|",
-            "named": false
           }
         ]
       },
@@ -1766,6 +1762,10 @@
     "named": true
   },
   {
+    "type": "pipe",
+    "named": true
+  },
+  {
     "type": "s\"",
     "named": false
   },
@@ -1815,10 +1815,6 @@
   },
   {
     "type": "sql.sqlite",
-    "named": false
-  },
-  {
-    "type": "|",
     "named": false
   }
 ]

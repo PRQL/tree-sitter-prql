@@ -1,0 +1,101 @@
+================================================================================
+Pipes transforms
+================================================================================
+
+from employees | filter department == "Product" | select [first_name, last_name]
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (identifier))
+    (pipe)
+    (transforms
+      (filter
+        (keyword_filter)
+        (binary_expression
+          (field
+            (identifier))
+          (literal)))
+      (pipe)
+      (select
+        (keyword_select)
+        (term
+          (field
+            (identifier)))
+        (term
+          (field
+            (identifier)))))))
+
+================================================================================
+Pipes functions
+================================================================================
+func interp lower:0 higher x -> (x - lower) / (higher - lower)
+
+from students
+derive [
+  sat_proportion_1 = (sat_score | interp 1600),
+  sat_proportion_2 = (sat_score | interp lower:0 1600),
+]
+--------------------------------------------------------------------------------
+
+(program
+  (function_definition
+    (keyword_func)
+    (identifier)
+    (parameter
+      (identifier)
+      (literal
+        (integer)))
+    (parameter
+      (identifier))
+    (parameter
+      (identifier))
+    (binary_expression
+      (binary_expression
+        (field
+          (identifier))
+        (field
+          (identifier)))
+      (binary_expression
+        (field
+          (identifier))
+        (field
+          (identifier)))))
+  (pipeline
+    (from
+      (keyword_from)
+      (identifier))
+    (transforms
+      (derives
+        (keyword_derive)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (function_call
+              (identifier)
+              (pipe)
+              (parameter
+                (identifier))
+              (parameter
+                (literal
+                  (integer))))))
+        (term
+          (assignment
+            (field
+              (identifier))
+            (function_call
+              (identifier)
+              (pipe)
+              (parameter
+                (identifier))
+              (parameter
+                (identifier)
+                (literal
+                  (integer)))
+              (parameter
+                (literal
+                  (integer))))))))))
