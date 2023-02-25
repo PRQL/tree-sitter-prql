@@ -228,6 +228,26 @@
             "named": true
           },
           {
+            "type": "keyword_avg",
+            "named": true
+          },
+          {
+            "type": "keyword_count_distinct",
+            "named": true
+          },
+          {
+            "type": "keyword_max",
+            "named": true
+          },
+          {
+            "type": "keyword_min",
+            "named": true
+          },
+          {
+            "type": "keyword_stddev",
+            "named": true
+          },
+          {
             "type": "keyword_sum",
             "named": true
           },

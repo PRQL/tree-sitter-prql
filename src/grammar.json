@@ -536,7 +536,7 @@
     },
     "function_call": {
       "type": "PREC",
-      "value": 2,
+      "value": 1,
       "content": {
         "type": "SEQ",
         "members": [
@@ -1139,41 +1139,45 @@
         }
       ]
     },
+    "_agg_keywords": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_min"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword_max"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword_count_distinct"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword_average"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword_avg"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword_sum"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "keyword_stddev"
+        }
+      ]
+    },
     "aggregate_operation": {
       "type": "SEQ",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "keyword_min"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "keyword_max"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "keyword_count_distinct"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "keyword_average"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "keyword_avg"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "keyword_sum"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "keyword_stddev"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_agg_keywords"
         },
         {
           "type": "SYMBOL",
@@ -2243,7 +2247,7 @@
     },
     "field": {
       "type": "PREC",
-      "value": 1,
+      "value": 2,
       "content": {
         "type": "SEQ",
         "members": [
@@ -2408,37 +2412,32 @@
       ]
     },
     "_agg_rhs_assignment": {
-      "type": "FIELD",
-      "name": "operation",
+      "type": "PREC",
+      "value": 1,
       "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "keyword_average"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "keyword_sum"
-                  }
-                ]
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          },
-          {
-            "type": "SYMBOL",
-            "name": "_expression"
-          }
-        ]
+        "type": "FIELD",
+        "name": "operation",
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_agg_keywords"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          ]
+        }
       }
     },
     "assignment": {

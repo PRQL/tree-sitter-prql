@@ -10,7 +10,6 @@
   (keyword_join)
   (keyword_select)
   (keyword_switch)
-  (keyword_average)
   (keyword_inner)
   (keyword_right)
   (keyword_full)
@@ -18,7 +17,6 @@
   (keyword_rolling)
   (keyword_rows)
   (keyword_expanding)
-  (keyword_func)
   (keyword_let)
   (keyword_prql)
   (keyword_switch)
@@ -29,12 +27,17 @@
 
 (literal) @string
 
+(assignment
+  alias: (field) @field)
+
+alias: (identifier) @field
+
 (f_string) @string.special
 (s_string) @string.special
 
 (comment) @comment
 
-(keyword_func) @function
+(keyword_func) @keyword.function
 
 (function_call
   (identifier)) @function.call
@@ -85,6 +88,7 @@
   (keyword_avg)
   (keyword_sum)
   (keyword_stddev)
+  (keyword_count)
 ] @function.call
 
 [
@@ -117,18 +121,6 @@
   (keyword_false)
 ] @boolean
 
-(term
-  value: (field
-    table: (identifier) @storageclass))
-
-(term
-  value: (field
-    table: (identifier)
-    name: (identifier) @field))
-
-(term
-  value: (field
-    name: (identifier) @field))
 
 [
  (keyword_and)
@@ -142,9 +134,8 @@
 (parameter
   (identifier) @parameter)
 
-(function_call
-  name: (identifier) @function.call)
-
 (variable
   (keyword_let)
   name: (identifier) @constant)
+
+
