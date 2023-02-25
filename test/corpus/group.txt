@@ -104,7 +104,7 @@ take 1
             (identifier))))
       (takes
         (keyword_take)
-        (literal)))))
+        (integer)))))
 
 ================================================================================
 Group one column; sort and take
@@ -139,4 +139,4 @@ group role (
         (comment)
         (takes
           (keyword_take)
-          (literal))))))
+          (integer))))))

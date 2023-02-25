@@ -66,8 +66,12 @@
 (literal
   (integer) @number)
 
+(integer) @number
+
 (literal
   (decimal_number) @float)
+
+(decimal_number) @float
 
 [
   (keyword_min)

@@ -1284,13 +1284,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_natural_number"
-              },
-              "named": true,
-              "value": "literal"
+              "type": "SYMBOL",
+              "name": "integer"
             },
             {
               "type": "SYMBOL",

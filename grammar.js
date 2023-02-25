@@ -240,7 +240,7 @@ module.exports = grammar({
                     alias($._aggregate_count, $.aggregate_operation),
                     $.assignment,
                 ),
-            )
+            ),
         ),
 
         aggregate_operation: $ => seq(
@@ -292,7 +292,7 @@ module.exports = grammar({
         takes: $ => seq(
             $.keyword_take,
             choice(
-                alias($._natural_number, $.literal),
+                $.integer,
                 $.range
             )
         ),

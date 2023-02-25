@@ -1193,11 +1193,11 @@
       "required": true,
       "types": [
         {
-          "type": "keyword_take",
+          "type": "integer",
           "named": true
         },
         {
-          "type": "literal",
+          "type": "keyword_take",
           "named": true
         },
         {

@@ -51,4 +51,4 @@ take 10
             (identifier))))
       (takes
         (keyword_take)
-        (literal)))))
+        (integer)))))
