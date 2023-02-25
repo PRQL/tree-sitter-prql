@@ -20,7 +20,8 @@ filter age > 25
         (binary_expression
           (field
             (identifier))
-          (literal))))))
+          (literal
+            (integer)))))))
 
 ================================================================================
 Multiple filter
@@ -45,7 +46,8 @@ filter (age > 25 or department != "IT")
           (binary_expression
             (field
               (identifier))
-            (literal))
+            (literal
+              (integer)))
           (keyword_or)
           (binary_expression
             (field

@@ -19,8 +19,11 @@ derive temp_c = (fahrenheit_to_celsius temp_f)
       (binary_expression
         (field
           (identifier))
-        (literal))
-      (literal)))
+        (literal
+          (integer)))
+      (literal
+        (decimal_number
+          (integer)))))
   (pipeline
     (from
       (keyword_from)
@@ -59,7 +62,8 @@ derive [
     (identifier)
     (parameter
       (identifier)
-      (literal))
+      (literal
+        (integer)))
     (parameter
       (identifier))
     (parameter
@@ -91,7 +95,8 @@ derive [
             (function_call
               (identifier)
               (parameter
-                (literal))
+                (literal
+                  (integer)))
               (parameter
                 (identifier)))))
         (term
@@ -102,8 +107,10 @@ derive [
               (identifier)
               (parameter
                 (identifier)
-                (literal))
+                (literal
+                  (integer)))
               (parameter
-                (literal))
+                (literal
+                  (integer)))
               (parameter
                 (identifier)))))))))

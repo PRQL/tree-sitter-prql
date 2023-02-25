@@ -101,8 +101,10 @@ take 10..100
       (takes
         (keyword_take)
         (range
-          (literal)
-          (literal))))))
+          (literal
+            (integer))
+          (literal
+            (integer)))))))
 
 ================================================================================
 Pipeline with aliased column select
@@ -196,12 +198,14 @@ derive [
           (assignment
             (field
               (identifier))
-            (literal)))
+            (literal
+              (integer))))
         (term
           (assignment
             (field
               (identifier))
-            (literal))))
+            (literal
+              (integer)))))
       (derives
         (keyword_derive)
         (term
@@ -366,14 +370,41 @@ derive [
               (field
                 (identifier))
               (binary_expression
-                (literal)
+                (literal
+                  (integer))
                 (field
                   (identifier))))))
         (comment)))))
 
 ================================================================================
+Friendly Numbers
+================================================================================
+
+from invoices
+filter salary >= 1000_000
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (term
+        (field
+          (identifier))))
+    (transforms
+      (filter
+        (keyword_filter)
+        (binary_expression
+          (field
+            (identifier))
+          (literal
+            (integer)))))))
+
+================================================================================
 Expressions
 ================================================================================
+
 from employees
 group role (
   sort join_date

@@ -431,6 +431,21 @@
     "fields": {}
   },
   {
+    "type": "decimal_number",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "integer",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "derives",
     "named": true,
     "fields": {},
@@ -720,6 +735,11 @@
     "fields": {}
   },
   {
+    "type": "integer",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "joins",
     "named": true,
     "fields": {},
@@ -770,6 +790,14 @@
       "multiple": false,
       "required": false,
       "types": [
+        {
+          "type": "decimal_number",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
         {
           "type": "keyword_false",
           "named": true
@@ -1261,16 +1289,30 @@
   {
     "type": "time",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "integer",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "timestamp",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "integer",
+          "named": true
+        },
         {
           "type": "timezone",
           "named": true
@@ -1538,6 +1580,10 @@
   },
   {
     "type": "]",
+    "named": false
+  },
+  {
+    "type": "_",
     "named": false
   },
   {

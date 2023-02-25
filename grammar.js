@@ -318,7 +318,7 @@ module.exports = grammar({
             ':',
             choice(
                 $.range,
-                alias($._integer, $.literal),
+                alias($.integer, $.literal),
             )
         ),
 
@@ -412,8 +412,8 @@ module.exports = grammar({
 
         literal: $ => prec(2,
             choice(
-                $._integer,
-                $._decimal_number,
+                $.integer,
+                $.decimal_number,
                 $._literal_string,
                 $.keyword_true,
                 $.keyword_false,
@@ -449,12 +449,13 @@ module.exports = grammar({
         ),
 
         _natural_number: _ => /\d+/,
-        _integer: $ => seq(optional("-"), $._natural_number),
-        _decimal_number: $ => prec.left(
+        _friendly_number: $ => repeat1(choice($._natural_number, '_')),
+        integer: $ => prec.left(seq(optional("-"), $._friendly_number)),
+        decimal_number: $ => prec.left(
             choice(
                 seq(optional("-"), ".", $._natural_number),
-                seq($._integer, ".", $._natural_number),
-                seq($._integer, "."),
+                seq($.integer, ".", $._natural_number),
+                seq($.integer, "."),
             ),
         ),
 
@@ -608,7 +609,7 @@ module.exports = grammar({
             optional(
                 seq(
                     '.',
-                    $._integer,
+                    $.integer,
                 ),
             ),
         ),

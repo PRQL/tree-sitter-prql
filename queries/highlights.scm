@@ -63,11 +63,11 @@
   "."
 ] @punctuation.delimiter
 
-((literal) @number
- (#lua-match? @number "^%d+$"))
+(literal
+  (integer) @number)
 
-((literal) @float
-(#lua-match? @float "^[+-]?%d*\.%d*$"))
+(literal
+  (decimal_number) @float)
 
 [
   (keyword_min)

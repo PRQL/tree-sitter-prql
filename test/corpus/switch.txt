@@ -30,12 +30,14 @@ derive distance = switch [
                 (binary_expression
                   (field
                     (identifier)))
-                (literal))
+                (literal
+                  (integer)))
               (switch_condition
                 (binary_expression
                   (field
                     (identifier)))
-                (literal)))))))))
+                (literal
+                  (integer))))))))))
 
 ================================================================================
 Switch with default
@@ -70,12 +72,14 @@ derive distance = switch [
                 (binary_expression
                   (field
                     (identifier)))
-                (literal))
+                (literal
+                  (integer)))
               (switch_condition
                 (binary_expression
                   (field
                     (identifier)))
-                (literal))
+                (literal
+                  (integer)))
               (switch_condition
                 (literal
                   (keyword_true))

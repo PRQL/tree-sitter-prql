@@ -36,10 +36,13 @@ derive [
             (field
               (identifier))
             (binary_expression
-              (literal)
+              (literal
+                (integer))
               (binary_expression
-                (literal)
-                (literal)))))))))
+                (literal
+                  (integer))
+                (literal
+                  (integer))))))))))
 
 ================================================================================
 From text csv
@@ -81,10 +84,13 @@ derive [
             (field
               (identifier))
             (binary_expression
-              (literal)
+              (literal
+                (integer))
               (binary_expression
-                (literal)
-                (literal)))))))))
+                (literal
+                  (integer))
+                (literal
+                  (integer))))))))))
 
 ================================================================================
 From text json

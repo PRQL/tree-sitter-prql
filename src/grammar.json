@@ -1367,7 +1367,7 @@
               "type": "ALIAS",
               "content": {
                 "type": "SYMBOL",
-                "name": "_integer"
+                "name": "integer"
               },
               "named": true,
               "value": "literal"
@@ -1853,11 +1853,11 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "_integer"
+            "name": "integer"
           },
           {
             "type": "SYMBOL",
-            "name": "_decimal_number"
+            "name": "decimal_number"
           },
           {
             "type": "SYMBOL",
@@ -2052,28 +2052,48 @@
       "type": "PATTERN",
       "value": "\\d+"
     },
-    "_integer": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "-"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_natural_number"
-        }
-      ]
+    "_friendly_number": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_natural_number"
+          },
+          {
+            "type": "STRING",
+            "value": "_"
+          }
+        ]
+      }
     },
-    "_decimal_number": {
+    "integer": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "-"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_friendly_number"
+          }
+        ]
+      }
+    },
+    "decimal_number": {
       "type": "PREC_LEFT",
       "value": 0,
       "content": {
@@ -2109,7 +2129,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_integer"
+                "name": "integer"
               },
               {
                 "type": "STRING",
@@ -2126,7 +2146,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "_integer"
+                "name": "integer"
               },
               {
                 "type": "STRING",
@@ -3110,7 +3130,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_integer"
+                  "name": "integer"
                 }
               ]
             },

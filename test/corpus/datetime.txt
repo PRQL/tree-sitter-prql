@@ -46,7 +46,8 @@ derive order <  @16:54:32.123456
           (binary_expression
             (field
               (identifier))
-            (time)))))))
+            (time
+              (integer))))))))
 
 ================================================================================
 Time hour
@@ -146,7 +147,8 @@ derive order <  @2022-12-31T16:54:32.123456
           (binary_expression
             (field
               (identifier))
-            (timestamp)))))))
+            (timestamp
+              (integer))))))))
 
 ================================================================================
 Timestamp UTC
@@ -172,6 +174,7 @@ derive order <  @2022-12-31T16:54:32.123456Z
             (field
               (identifier))
             (timestamp
+              (integer)
               (timezone))))))))
 
 ================================================================================
@@ -198,6 +201,7 @@ derive order <  @2022-12-31T16:54:32.123456+02
             (field
               (identifier))
             (timestamp
+              (integer)
               (timezone
                 (direction)))))))))
 
@@ -225,5 +229,6 @@ derive order <  @2022-12-31T16:54:32.123456-02
             (field
               (identifier))
             (timestamp
+              (integer)
               (timezone
                 (direction)))))))))
