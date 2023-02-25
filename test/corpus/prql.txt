@@ -16,9 +16,7 @@ from employees
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))))
+      (identifier))))
 
 ================================================================================
 PRQL target
@@ -40,15 +38,11 @@ take 10
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (sorts
         (keyword_sort)
-        (term
-          (field
-            (identifier))))
+        (identifier))
       (takes
         (keyword_take)
         (integer)))))

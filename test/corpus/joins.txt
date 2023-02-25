@@ -11,15 +11,12 @@ join positions [employees.id==positions.employee_id]
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (joins
         (keyword_join)
         (term
-          (field
-            (identifier)))
+          (identifier))
         (conditions
           (binary_expression
             (field
@@ -42,17 +39,14 @@ join side:left positions [employees.id==positions.employee_id]
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (joins
         (keyword_join)
         (keyword_side)
         (keyword_left)
         (term
-          (field
-            (identifier)))
+          (identifier))
         (conditions
           (binary_expression
             (field
@@ -75,20 +69,15 @@ join side:left p=positions [employees.id==p.employee_id]
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (joins
         (keyword_join)
         (keyword_side)
         (keyword_left)
         (term
-          (assignment
-            (field
-              (identifier))
-            (field
-              (identifier))))
+          (identifier)
+          (identifier))
         (conditions
           (binary_expression
             (field
@@ -111,15 +100,12 @@ join positions [==emp_no]
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (joins
         (keyword_join)
         (term
-          (field
-            (identifier)))
+          (identifier))
         (conditions
           (term
             (field

@@ -14,9 +14,7 @@ derive distance = switch [
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -29,13 +27,15 @@ derive distance = switch [
               (switch_condition
                 (binary_expression
                   (field
-                    (identifier)))
+                    (identifier))
+                  (literal))
                 (literal
                   (integer)))
               (switch_condition
                 (binary_expression
                   (field
-                    (identifier)))
+                    (identifier))
+                  (literal))
                 (literal
                   (integer))))))))))
 
@@ -56,9 +56,7 @@ derive distance = switch [
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -71,13 +69,15 @@ derive distance = switch [
               (switch_condition
                 (binary_expression
                   (field
-                    (identifier)))
+                    (identifier))
+                  (literal))
                 (literal
                   (integer)))
               (switch_condition
                 (binary_expression
                   (field
-                    (identifier)))
+                    (identifier))
+                  (literal))
                 (literal
                   (integer)))
               (switch_condition

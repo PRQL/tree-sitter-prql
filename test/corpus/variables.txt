@@ -20,15 +20,11 @@ from top_50
     (pipeline
       (from
         (keyword_from)
-        (term
-          (field
-            (identifier))))
+        (identifier))
       (transforms
         (sorts
           (keyword_sort)
-          (term
-            (field
-              (identifier))))
+          (identifier))
         (takes
           (keyword_take)
           (integer))
@@ -43,6 +39,4 @@ from top_50
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))))
+      (identifier))))

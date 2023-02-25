@@ -16,9 +16,7 @@ group title (
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (group
         (keyword_group)
@@ -55,9 +53,7 @@ group [title, country] (
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (group
         (keyword_group)
@@ -93,15 +89,11 @@ take 1
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (sorts
         (keyword_sort)
-        (term
-          (field
-            (identifier))))
+        (identifier))
       (takes
         (keyword_take)
         (integer)))))
@@ -122,9 +114,7 @@ group role (
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (group
         (keyword_group)
@@ -133,9 +123,7 @@ group role (
             (identifier)))
         (sorts
           (keyword_sort)
-          (term
-            (field
-              (identifier))))
+          (identifier))
         (comment)
         (takes
           (keyword_take)

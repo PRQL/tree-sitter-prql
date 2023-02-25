@@ -136,15 +136,12 @@ join y [==a]
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (joins
         (keyword_join)
         (term
-          (field
-            (identifier)))
+          (identifier))
         (conditions
           (term
             (field

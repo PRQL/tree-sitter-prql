@@ -11,15 +11,11 @@ sort age
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (sorts
         (keyword_sort)
-        (term
-          (field
-            (identifier)))))))
+        (identifier)))))
 
 ================================================================================
 Simple sort with direction
@@ -34,16 +30,12 @@ sort [-age]
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (sorts
         (keyword_sort)
         (direction)
-        (term
-          (field
-            (identifier)))))))
+        (identifier)))))
 
 ================================================================================
 Multiple sorts with direction
@@ -58,20 +50,12 @@ sort [age, -tenure, +salary]
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (sorts
         (keyword_sort)
-        (term
-          (field
-            (identifier)))
+        (identifier)
         (direction)
-        (term
-          (field
-            (identifier)))
+        (identifier)
         (direction)
-        (term
-          (field
-            (identifier)))))))
+        (identifier)))))

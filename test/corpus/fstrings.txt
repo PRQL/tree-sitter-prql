@@ -11,9 +11,7 @@ derive name = f"{c.last_name}, {c.first_name}"
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (derives
         (keyword_derive)
@@ -36,18 +34,15 @@ select db_version = s"version()"
   (pipeline
     (from
       (keyword_from)
-      (term
-        (field
-          (identifier))))
+      (identifier))
     (transforms
       (select
         (keyword_select)
-        (table_reference
-          (term
-            (assignment
-              (field
-                (identifier))
-              (s_string))))))))
+        (term
+          (assignment
+            (field
+              (identifier))
+            (s_string)))))))
 
 ================================================================================
 S Strings functions
