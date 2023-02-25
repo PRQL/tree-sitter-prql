@@ -4,6 +4,7 @@ module.exports = grammar({
     extras: $ => [
         /\s\n/,
         /\s/,
+        '|',
         $.comment,
     ],
     precedences: $ => [
@@ -17,6 +18,7 @@ module.exports = grammar({
             'range',
             'clause_connective',
             'clause_disjunctive',
+            'pipe',
         ],
     ],
 
@@ -549,7 +551,7 @@ module.exports = grammar({
             ['-', 'binary_plus'],
             ['*', 'binary_times'],
             ['/', 'binary_times'],
-            ['|', 'binary_pipe'],
+            // ['|', 'binary_pipe'],
             ['==', 'binary_relation'],
             ['!=', 'binary_relation'],
             ['>', 'binary_relation'],
@@ -625,13 +627,14 @@ module.exports = grammar({
             $._time,
         ),
 
-        timestamp: $ => prec.right(seq(
-            '@',
-            $._date,
-            'T',
-            $._time,
-            optional($.timezone),
-        ),
+        timestamp: $ => prec.right(
+            seq(
+                '@',
+                $._date,
+                'T',
+                $._time,
+                optional($.timezone),
+            ),
         ),
 
         timezone: $ => choice(
@@ -646,6 +649,7 @@ module.exports = grammar({
         comment: _ => seq('#', /.*/),
 
         bang: _ => '!',
+        pipe: _ => '|',
 
     },
 });

@@ -40,7 +40,7 @@ alias: (identifier) @field
 (keyword_func) @keyword.function
 
 (function_call
-  (identifier)) @function.call
+  (identifier) @function.call)
 
 [
   "+"
@@ -55,6 +55,7 @@ alias: (identifier) @field
   ">="
   ">"
   "->"
+  (bang)
 ] @operator
 
 [
@@ -67,6 +68,7 @@ alias: (identifier) @field
 [
   ","
   "."
+  (pipe)
 ] @punctuation.delimiter
 
 (literal
@@ -121,7 +123,6 @@ alias: (identifier) @field
   (keyword_false)
 ] @boolean
 
-
 [
  (keyword_and)
  (keyword_or)
@@ -137,5 +138,3 @@ alias: (identifier) @field
 (variable
   (keyword_let)
   name: (identifier) @constant)
-
-
