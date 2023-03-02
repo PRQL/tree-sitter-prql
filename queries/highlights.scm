@@ -22,7 +22,7 @@
 ] @keyword
 
 [
- (string_literal)
+ (literal_string)
  (f_string)
  (s_string)
 ] @string
