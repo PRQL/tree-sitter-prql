@@ -22,7 +22,7 @@
 ] @keyword
 
 [
- (literal)
+ (string_literal)
  (f_string)
  (s_string)
 ] @string
@@ -53,7 +53,6 @@ alias: (identifier) @field
   "!="
   ">="
   ">"
-  "->"
   (bang)
 ] @operator
 
@@ -68,15 +67,10 @@ alias: (identifier) @field
   ","
   "."
   (pipe)
+  "->"
 ] @punctuation.delimiter
 
-(literal
-  (integer) @number)
-
 (integer) @number
-
-(literal
-  (decimal_number) @float)
 
 (decimal_number) @float
 
@@ -117,7 +111,7 @@ alias: (identifier) @field
   (keyword_full)
   (keyword_csv)
   (keyword_json)
-] @method
+] @method.call
 
 [
   (keyword_true)
@@ -143,4 +137,5 @@ alias: (identifier) @field
 
 
  (keyword_null) @constant.builtin
+
 

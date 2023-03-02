@@ -873,9 +873,18 @@
         {
           "type": "keyword_true",
           "named": true
+        },
+        {
+          "type": "literal_string",
+          "named": true
         }
       ]
     }
+  },
+  {
+    "type": "literal_string",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "parameter",

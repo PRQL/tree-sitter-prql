@@ -162,7 +162,8 @@ select [first_name, last_name]
         (binary_expression
           (field
             (identifier))
-          (literal)))
+          (literal
+            (literal_string))))
       (select
         (keyword_select)
         (term
@@ -515,4 +516,5 @@ derive channel = channel ?? "unknown"
             (binary_expression
               (field
                 (identifier))
-              (literal))))))))
+              (literal
+                (literal_string)))))))))
