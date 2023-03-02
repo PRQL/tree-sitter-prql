@@ -128,3 +128,31 @@ group role (
         (takes
           (keyword_take)
           (integer))))))
+
+================================================================================
+Default windows
+================================================================================
+
+from employees
+sort age
+derive rnk = rank
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (identifier))
+    (transforms
+      (sorts
+        (keyword_sort)
+        (identifier))
+      (derives
+        (keyword_derive)
+        (term
+          (assignment
+            (field
+              (identifier))
+            (field
+              (identifier))))))))

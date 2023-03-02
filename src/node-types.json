@@ -75,6 +75,10 @@
           "named": true
         },
         {
+          "type": "keyword_rank",
+          "named": true
+        },
+        {
           "type": "keyword_stddev",
           "named": true
         },
@@ -1708,6 +1712,10 @@
   },
   {
     "type": "keyword_prql",
+    "named": true
+  },
+  {
+    "type": "keyword_rank",
     "named": true
   },
   {
