@@ -129,6 +129,42 @@
       "type": "PATTERN",
       "value": "count_distinct|COUNT_DISTINCT"
     },
+    "keyword_lag": {
+      "type": "PATTERN",
+      "value": "lag|LAG"
+    },
+    "keyword_lead": {
+      "type": "PATTERN",
+      "value": "lead|LEAD"
+    },
+    "keyword_first": {
+      "type": "PATTERN",
+      "value": "first|FIRST"
+    },
+    "keyword_last": {
+      "type": "PATTERN",
+      "value": "last|LAST"
+    },
+    "keyword_rank": {
+      "type": "PATTERN",
+      "value": "rank|RANK"
+    },
+    "keyword_row_number": {
+      "type": "PATTERN",
+      "value": "row_number|ROW_NUMBER"
+    },
+    "keyword_round": {
+      "type": "PATTERN",
+      "value": "round|ROUND"
+    },
+    "keyword_all": {
+      "type": "PATTERN",
+      "value": "all|ALL"
+    },
+    "keyword_map": {
+      "type": "PATTERN",
+      "value": "map|MAP"
+    },
     "keyword_side": {
       "type": "PATTERN",
       "value": "side|SIDE"
@@ -1063,7 +1099,7 @@
                           "type": "ALIAS",
                           "content": {
                             "type": "SYMBOL",
-                            "name": "_aggregate_count"
+                            "name": "_aggregate_func"
                           },
                           "named": true,
                           "value": "aggregate_operation"
@@ -1098,7 +1134,7 @@
                                 "type": "ALIAS",
                                 "content": {
                                   "type": "SYMBOL",
-                                  "name": "_aggregate_count"
+                                  "name": "_aggregate_func"
                                 },
                                 "named": true,
                                 "value": "aggregate_operation"
@@ -1185,26 +1221,43 @@
         }
       ]
     },
-    "_aggregate_count": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "keyword_count"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_expression"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
+    "_aggregate_func": {
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "keyword_count"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "keyword_count_distinct"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "keyword_rank"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_expression"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
     },
     "sorts": {
       "type": "SEQ",

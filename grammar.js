@@ -58,6 +58,15 @@ module.exports = grammar({
         keyword_avg: _ => make_keyword("avg"),
         keyword_sum: _ => make_keyword("sum"),
         keyword_count_distinct: _ => make_keyword("count_distinct"),
+        keyword_lag: _ => make_keyword("lag"),
+        keyword_lead: _ => make_keyword("lead"),
+        keyword_first: _ => make_keyword("first"),
+        keyword_last: _ => make_keyword("last"),
+        keyword_rank: _ => make_keyword("rank"),
+        keyword_row_number: _ => make_keyword("row_number"),
+        keyword_round: _ => make_keyword("round"),
+        keyword_all: _ => make_keyword("all"),
+        keyword_map: _ => make_keyword("map"),
         keyword_side: _ => make_keyword("side"),
         keyword_inner: _ => make_keyword("inner"),
         keyword_left: _ => make_keyword("left"),
@@ -263,7 +272,7 @@ module.exports = grammar({
                 choice(
                     $.binary_expression,
                     $.aggregate_operation,
-                    alias($._aggregate_count, $.aggregate_operation),
+                    alias($._aggregate_func, $.aggregate_operation),
                     $.assignment,
                 ),
             ),
@@ -284,9 +293,15 @@ module.exports = grammar({
             $._expression,
         ),
 
-        _aggregate_count: $ => seq(
-            $.keyword_count,
-            optional($._expression),
+        _aggregate_func: $ => prec(1,
+            seq(
+                choice(
+                    $.keyword_count,
+                    $.keyword_count_distinct,
+                    $.keyword_rank,
+                ),
+                optional($._expression),
+            ),
         ),
         
         sorts: $ => seq(
