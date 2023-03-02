@@ -428,7 +428,7 @@ module.exports = grammar({
             choice(
                 $.integer,
                 $.decimal_number,
-                $._literal_string,
+                $.literal_string,
                 $.keyword_true,
                 $.keyword_false,
                 $.keyword_null,
@@ -456,7 +456,7 @@ module.exports = grammar({
         _double_s_string: _ => seq('s"', /[^"]*/, '"'),
         _triple_s_string: $ => seq('s"""', $._inner_triple_quotes, '"""'),
 
-        _literal_string: $ => prec(1,
+        literal_string: $ => prec(1,
             choice(
                 $._single_quote_string,
                 $._double_quote_string,

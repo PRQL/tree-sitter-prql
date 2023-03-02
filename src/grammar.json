@@ -1945,7 +1945,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "_literal_string"
+            "name": "literal_string"
           },
           {
             "type": "SYMBOL",
@@ -2119,7 +2119,7 @@
         }
       ]
     },
-    "_literal_string": {
+    "literal_string": {
       "type": "PREC",
       "value": 1,
       "content": {

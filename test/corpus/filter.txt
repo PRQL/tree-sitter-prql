@@ -48,4 +48,5 @@ filter (age > 25 or department != "IT")
           (binary_expression
             (field
               (identifier))
-            (literal)))))))
+            (literal
+              (literal_string))))))))

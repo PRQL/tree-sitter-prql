@@ -10,32 +10,31 @@
   (keyword_join)
   (keyword_select)
   (keyword_switch)
-  (keyword_inner)
-  (keyword_right)
-  (keyword_full)
-  (keyword_in)
+  (keyword_append)
+  (keyword_remove)
+  (keyword_intersect)
   (keyword_rolling)
   (keyword_rows)
   (keyword_expanding)
   (keyword_let)
   (keyword_prql)
-  (keyword_switch)
-  (keyword_append)
-  (keyword_remove)
-  (keyword_intersect)
+  (keyword_from_text)
 ] @keyword
 
-(literal) @string
+[
+ (literal_string)
+ (f_string)
+ (s_string)
+] @string
 
 (assignment
   alias: (field) @field)
 
 alias: (identifier) @field
 
-(f_string) @string.special
-(s_string) @string.special
 
-(comment) @comment
+
+(comment) @comment @spell
 
 (keyword_func) @keyword.function
 
@@ -54,7 +53,6 @@ alias: (identifier) @field
   "!="
   ">="
   ">"
-  "->"
   (bang)
 ] @operator
 
@@ -69,15 +67,10 @@ alias: (identifier) @field
   ","
   "."
   (pipe)
+  "->"
 ] @punctuation.delimiter
 
-(literal
-  (integer) @number)
-
 (integer) @number
-
-(literal
-  (decimal_number) @float)
 
 (decimal_number) @float
 
@@ -91,15 +84,17 @@ alias: (identifier) @field
   (keyword_sum)
   (keyword_stddev)
   (keyword_count)
-] @function.call
+] @function
 
 [
  (keyword_side)
- (keyword_version)
- (keyword_target)
- (keyword_null)
  (keyword_format)
 ] @attribute
+
+[
+ (keyword_version)
+ (keyword_target)
+] @type.qualifier
 
 (target) @function.builtin
 
@@ -116,7 +111,7 @@ alias: (identifier) @field
   (keyword_full)
   (keyword_csv)
   (keyword_json)
-] @method
+] @method.call
 
 [
   (keyword_true)
@@ -126,6 +121,7 @@ alias: (identifier) @field
 [
  (keyword_and)
  (keyword_or)
+ (keyword_in)
 ] @keyword.operator
 
 (function_definition
@@ -138,3 +134,8 @@ alias: (identifier) @field
 (variable
   (keyword_let)
   name: (identifier) @constant)
+
+
+ (keyword_null) @constant.builtin
+
+
