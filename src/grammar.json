@@ -149,10 +149,6 @@
       "type": "PATTERN",
       "value": "rank|RANK"
     },
-    "keyword_rank_dense": {
-      "type": "PATTERN",
-      "value": "rank_dense|RANK_DENSE"
-    },
     "keyword_row_number": {
       "type": "PATTERN",
       "value": "row_number|ROW_NUMBER"
@@ -168,18 +164,6 @@
     "keyword_map": {
       "type": "PATTERN",
       "value": "map|MAP"
-    },
-    "keyword_zip": {
-      "type": "PATTERN",
-      "value": "zip|ZIP"
-    },
-    "keyword__eq": {
-      "type": "PATTERN",
-      "value": "_eq|_EQ"
-    },
-    "keyword__is_null": {
-      "type": "PATTERN",
-      "value": "_is_null|_IS_NULL"
     },
     "keyword_side": {
       "type": "PATTERN",
