@@ -79,6 +79,7 @@ module.exports = grammar({
         keyword_rows: _ => make_keyword("rows"),
         keyword_expanding: _ => make_keyword("expanding"),
         keyword_null: _ => make_keyword("null"),
+        keyword_loop: _ => make_keyword("loop"),
 
         keyword_func: _ => make_keyword("func"),
         keyword_let: _ => make_keyword("let"),

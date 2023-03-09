@@ -22,9 +22,9 @@ derive distance = case [
           (assignment
             (field
               (identifier))
-            (switch
-              (keyword_switch)
-              (switch_condition
+            (case
+              (keyword_case)
+              (case_condition
                 (binary_expression
                   (field
                     (identifier))
@@ -32,7 +32,7 @@ derive distance = case [
                     (literal_string)))
                 (literal
                   (integer)))
-              (switch_condition
+              (case_condition
                 (binary_expression
                   (field
                     (identifier))
@@ -66,9 +66,9 @@ derive distance = case [
           (assignment
             (field
               (identifier))
-            (switch
-              (keyword_switch)
-              (switch_condition
+            (case
+              (keyword_case)
+              (case_condition
                 (binary_expression
                   (field
                     (identifier))
@@ -76,7 +76,7 @@ derive distance = case [
                     (literal_string)))
                 (literal
                   (integer)))
-              (switch_condition
+              (case_condition
                 (binary_expression
                   (field
                     (identifier))
@@ -84,7 +84,7 @@ derive distance = case [
                     (literal_string)))
                 (literal
                   (integer)))
-              (switch_condition
+              (case_condition
                 (literal
                   (keyword_true))
                 (literal
