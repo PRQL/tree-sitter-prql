@@ -46,7 +46,7 @@ module.exports = grammar({
         keyword_select: _ => make_keyword("select"),
         keyword_true: _ => make_keyword("true"),
         keyword_false: _ => make_keyword("false"),
-        keyword_switch: _ => make_keyword("switch"),
+        keyword_case: _ => make_keyword("case"),
         keyword_append: _ => make_keyword("append"),
         keyword_remove: _ => make_keyword("remove"),
         keyword_intersect: _ => make_keyword("intersect"),
@@ -79,6 +79,7 @@ module.exports = grammar({
         keyword_rows: _ => make_keyword("rows"),
         keyword_expanding: _ => make_keyword("expanding"),
         keyword_null: _ => make_keyword("null"),
+        keyword_loop: _ => make_keyword("loop"),
 
         keyword_func: _ => make_keyword("func"),
         keyword_let: _ => make_keyword("let"),
@@ -251,17 +252,17 @@ module.exports = grammar({
             ),
         ),
 
-        switch: $ => seq(
-            $.keyword_switch,
-            sq_bracket_list(repeat1($.switch_condition)),
+        case: $ => seq(
+            $.keyword_case,
+            sq_bracket_list(repeat1($.case_condition)),
         ),
 
-        switch_condition: $ => seq(
+        case_condition: $ => seq(
             choice(
                 $.binary_expression,
                 field("default", $.literal),
             ),
-            "->",
+            "=>",
             field("result", $.literal),
             ',',
         ),
@@ -554,7 +555,7 @@ module.exports = grammar({
                         parens($._agg_rhs_assignment),
                         field('operator', $.function_call),
                         parens(field('operator', $.function_call)),
-                        field('operator', $.switch),
+                        field('operator', $.case),
                     ),
                 ),
             ),

@@ -1,11 +1,11 @@
 ================================================================================
-Switch #1
+Case #1
 ================================================================================
 
 from employees
-derive distance = switch [
-  city == "Calgary" -> 0,
-  city == "Edmonton" -> 300,
+derive distance = case [
+  city == "Calgary" => 0,
+  city == "Edmonton" => 300,
 ]
 
 --------------------------------------------------------------------------------
@@ -22,9 +22,9 @@ derive distance = switch [
           (assignment
             (field
               (identifier))
-            (switch
-              (keyword_switch)
-              (switch_condition
+            (case
+              (keyword_case)
+              (case_condition
                 (binary_expression
                   (field
                     (identifier))
@@ -32,7 +32,7 @@ derive distance = switch [
                     (literal_string)))
                 (literal
                   (integer)))
-              (switch_condition
+              (case_condition
                 (binary_expression
                   (field
                     (identifier))
@@ -42,14 +42,14 @@ derive distance = switch [
                   (integer))))))))))
 
 ================================================================================
-Switch with default
+Case with default
 ================================================================================
 
 from employees
-derive distance = switch [
-  city == "Calgary" -> 0,
-  city == "Edmonton" -> 300,
-  true -> "Unknown",
+derive distance = case [
+  city == "Calgary" => 0,
+  city == "Edmonton" => 300,
+  true => "Unknown",
 ]
 
 --------------------------------------------------------------------------------
@@ -66,9 +66,9 @@ derive distance = switch [
           (assignment
             (field
               (identifier))
-            (switch
-              (keyword_switch)
-              (switch_condition
+            (case
+              (keyword_case)
+              (case_condition
                 (binary_expression
                   (field
                     (identifier))
@@ -76,7 +76,7 @@ derive distance = switch [
                     (literal_string)))
                 (literal
                   (integer)))
-              (switch_condition
+              (case_condition
                 (binary_expression
                   (field
                     (identifier))
@@ -84,7 +84,7 @@ derive distance = switch [
                     (literal_string)))
                 (literal
                   (integer)))
-              (switch_condition
+              (case_condition
                 (literal
                   (keyword_true))
                 (literal

@@ -81,9 +81,9 @@
       "type": "PATTERN",
       "value": "false|FALSE"
     },
-    "keyword_switch": {
+    "keyword_case": {
       "type": "PATTERN",
-      "value": "switch|SWITCH"
+      "value": "case|CASE"
     },
     "keyword_append": {
       "type": "PATTERN",
@@ -212,6 +212,10 @@
     "keyword_null": {
       "type": "PATTERN",
       "value": "null|NULL"
+    },
+    "keyword_loop": {
+      "type": "PATTERN",
+      "value": "loop|LOOP"
     },
     "keyword_func": {
       "type": "PATTERN",
@@ -953,12 +957,12 @@
         }
       ]
     },
-    "switch": {
+    "case": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "keyword_switch"
+          "name": "keyword_case"
         },
         {
           "type": "SEQ",
@@ -977,7 +981,7 @@
                       "type": "REPEAT1",
                       "content": {
                         "type": "SYMBOL",
-                        "name": "switch_condition"
+                        "name": "case_condition"
                       }
                     },
                     {
@@ -993,7 +997,7 @@
                             "type": "REPEAT1",
                             "content": {
                               "type": "SYMBOL",
-                              "name": "switch_condition"
+                              "name": "case_condition"
                             }
                           }
                         ]
@@ -1026,7 +1030,7 @@
         }
       ]
     },
-    "switch_condition": {
+    "case_condition": {
       "type": "SEQ",
       "members": [
         {
@@ -1048,7 +1052,7 @@
         },
         {
           "type": "STRING",
-          "value": "->"
+          "value": "=>"
         },
         {
           "type": "FIELD",
@@ -2579,7 +2583,7 @@
                         "name": "operator",
                         "content": {
                           "type": "SYMBOL",
-                          "name": "switch"
+                          "name": "case"
                         }
                       }
                     ]
