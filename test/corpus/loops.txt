@@ -1,0 +1,39 @@
+================================================================================
+Loop 1
+================================================================================
+
+from table
+loop (
+    filter n<4
+    select n = n+1
+)
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (identifier))
+    (transforms
+      (loop
+        (keyword_loop)
+        (transforms
+          (filter
+            (keyword_filter)
+            (binary_expression
+              (field
+                (identifier))
+              (literal
+                (integer))))
+          (select
+            (keyword_select)
+            (term
+              (assignment
+                (field
+                  (identifier))
+                (binary_expression
+                  (field
+                    (identifier))
+                  (literal
+                    (integer)))))))))))
