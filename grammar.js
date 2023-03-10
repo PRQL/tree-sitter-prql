@@ -183,6 +183,13 @@ module.exports = grammar({
             alias($._triple_quote_string, $.literal),
         ),
 
+        loop: $ => seq(
+            $.keyword_loop,
+            parens(
+                $.transforms
+            )
+        ),
+
         transforms: $ => repeat1(
             choice(
                 $.derives,
@@ -194,6 +201,7 @@ module.exports = grammar({
                 $.aggregate,
                 $.group,
                 $.append,
+                $.loop,
             ),
         ),
 

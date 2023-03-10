@@ -655,6 +655,32 @@
         }
       ]
     },
+    "loop": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "keyword_loop"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "SYMBOL",
+              "name": "transforms"
+            },
+            {
+              "type": "STRING",
+              "value": ")"
+            }
+          ]
+        }
+      ]
+    },
     "transforms": {
       "type": "REPEAT1",
       "content": {
@@ -695,6 +721,10 @@
           {
             "type": "SYMBOL",
             "name": "append"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "loop"
           }
         ]
       }

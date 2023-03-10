@@ -946,6 +946,25 @@
     "fields": {}
   },
   {
+    "type": "loop",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "keyword_loop",
+          "named": true
+        },
+        {
+          "type": "transforms",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parameter",
     "named": true,
     "fields": {
@@ -1360,6 +1379,10 @@
           "named": true
         },
         {
+          "type": "loop",
+          "named": true
+        },
+        {
           "type": "select",
           "named": true
         },
@@ -1700,6 +1723,10 @@
   },
   {
     "type": "keyword_let",
+    "named": true
+  },
+  {
+    "type": "keyword_loop",
     "named": true
   },
   {
