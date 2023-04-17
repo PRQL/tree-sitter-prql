@@ -352,6 +352,10 @@
             "named": false
           },
           {
+            "type": "&&",
+            "named": false
+          },
+          {
             "type": "*",
             "named": false
           },
@@ -398,6 +402,10 @@
           {
             "type": "keyword_or",
             "named": true
+          },
+          {
+            "type": "||",
+            "named": false
           }
         ]
       },
@@ -1506,6 +1514,10 @@
     "named": false
   },
   {
+    "type": "&&",
+    "named": false
+  },
+  {
     "type": "'",
     "named": false
   },
@@ -1863,6 +1875,10 @@
   },
   {
     "type": "sql.sqlite",
+    "named": false
+  },
+  {
+    "type": "||",
     "named": false
   }
 ]

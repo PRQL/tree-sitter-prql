@@ -591,8 +591,8 @@ module.exports = grammar({
             ))
           ),
           ...[
-            [$.keyword_and, 'clause_connective'],
-            [$.keyword_or, 'clause_disjunctive'],
+            ['&&', 'clause_connective'],
+            ['||', 'clause_disjunctive'],
           ].map(([operator, precedence]) =>
             prec.left(precedence, choice(
                 seq(

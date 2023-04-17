@@ -54,6 +54,8 @@ alias: (identifier) @field
   "!="
   ">="
   ">"
+  "||"
+  "&&"
   (bang)
 ] @operator
 
@@ -129,8 +131,6 @@ alias: (identifier) @field
 ] @boolean
 
 [
- (keyword_and)
- (keyword_or)
  (keyword_in)
 ] @keyword.operator
 
