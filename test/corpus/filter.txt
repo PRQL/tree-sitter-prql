@@ -26,7 +26,8 @@ Multiple filter
 ================================================================================
 
 from employees
-filter (age > 25 or department != "IT")
+filter (age > 25 || department != "IT")
+filter (age > 25 && department != "IT")
 
 --------------------------------------------------------------------------------
 
@@ -44,7 +45,19 @@ filter (age > 25 or department != "IT")
               (identifier))
             (literal
               (integer)))
-          (keyword_or)
+          (binary_expression
+            (field
+              (identifier))
+            (literal
+              (literal_string)))))
+      (filter
+        (keyword_filter)
+        (binary_expression
+          (binary_expression
+            (field
+              (identifier))
+            (literal
+              (integer)))
           (binary_expression
             (field
               (identifier))

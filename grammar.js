@@ -72,8 +72,6 @@ module.exports = grammar({
         keyword_left: _ => make_keyword("left"),
         keyword_right: _ => make_keyword("right"),
         keyword_full: _ => make_keyword("full"),
-        keyword_and: _ => make_keyword("and"),
-        keyword_or: _ => make_keyword("or"),
         keyword_in: _ => make_keyword("in"),
         keyword_rolling: _ => make_keyword("rolling"),
         keyword_rows: _ => make_keyword("rows"),
@@ -591,8 +589,8 @@ module.exports = grammar({
             ))
           ),
           ...[
-            [$.keyword_and, 'clause_connective'],
-            [$.keyword_or, 'clause_disjunctive'],
+            ['&&', 'clause_connective'],
+            ['||', 'clause_disjunctive'],
           ].map(([operator, precedence]) =>
             prec.left(precedence, choice(
                 seq(

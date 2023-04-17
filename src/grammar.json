@@ -185,14 +185,6 @@
       "type": "PATTERN",
       "value": "full|FULL"
     },
-    "keyword_and": {
-      "type": "PATTERN",
-      "value": "and|AND"
-    },
-    "keyword_or": {
-      "type": "PATTERN",
-      "value": "or|OR"
-    },
     "keyword_in": {
       "type": "PATTERN",
       "value": "in|IN"
@@ -3012,8 +3004,8 @@
                     "type": "FIELD",
                     "name": "operator",
                     "content": {
-                      "type": "SYMBOL",
-                      "name": "keyword_and"
+                      "type": "STRING",
+                      "value": "&&"
                     }
                   },
                   {
@@ -3045,8 +3037,8 @@
                     "type": "FIELD",
                     "name": "operator",
                     "content": {
-                      "type": "SYMBOL",
-                      "name": "keyword_and"
+                      "type": "STRING",
+                      "value": "&&"
                     }
                   },
                   {
@@ -3087,8 +3079,8 @@
                     "type": "FIELD",
                     "name": "operator",
                     "content": {
-                      "type": "SYMBOL",
-                      "name": "keyword_or"
+                      "type": "STRING",
+                      "value": "||"
                     }
                   },
                   {
@@ -3120,8 +3112,8 @@
                     "type": "FIELD",
                     "name": "operator",
                     "content": {
-                      "type": "SYMBOL",
-                      "name": "keyword_or"
+                      "type": "STRING",
+                      "value": "||"
                     }
                   },
                   {

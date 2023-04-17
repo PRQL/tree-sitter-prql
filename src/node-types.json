@@ -352,6 +352,10 @@
             "named": false
           },
           {
+            "type": "&&",
+            "named": false
+          },
+          {
             "type": "*",
             "named": false
           },
@@ -392,12 +396,8 @@
             "named": false
           },
           {
-            "type": "keyword_and",
-            "named": true
-          },
-          {
-            "type": "keyword_or",
-            "named": true
+            "type": "||",
+            "named": false
           }
         ]
       },
@@ -1506,6 +1506,10 @@
     "named": false
   },
   {
+    "type": "&&",
+    "named": false
+  },
+  {
     "type": "'",
     "named": false
   },
@@ -1630,10 +1634,6 @@
     "named": true
   },
   {
-    "type": "keyword_and",
-    "named": true
-  },
-  {
     "type": "keyword_append",
     "named": true
   },
@@ -1739,10 +1739,6 @@
   },
   {
     "type": "keyword_null",
-    "named": true
-  },
-  {
-    "type": "keyword_or",
     "named": true
   },
   {
@@ -1863,6 +1859,10 @@
   },
   {
     "type": "sql.sqlite",
+    "named": false
+  },
+  {
+    "type": "||",
     "named": false
   }
 ]
