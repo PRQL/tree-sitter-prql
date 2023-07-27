@@ -27,10 +27,6 @@
               {
                 "type": "SYMBOL",
                 "name": "variable"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "module_definition"
               }
             ]
           }
@@ -217,9 +213,9 @@
       "type": "PATTERN",
       "value": "internal|INTERNAL"
     },
-    "keyword_mod": {
+    "keyword_module": {
       "type": "PATTERN",
-      "value": "mod|MOD"
+      "value": "module|MODULE"
     },
     "keyword_func": {
       "type": "PATTERN",
@@ -639,51 +635,6 @@
           }
         ]
       }
-    },
-    "module_definition": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "keyword_mod"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        },
-        {
-          "type": "STRING",
-          "value": "{"
-        },
-        {
-          "type": "REPEAT1",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "variable"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "pipeline"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "module_definition"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "function_definition"
-              }
-            ]
-          }
-        },
-        {
-          "type": "STRING",
-          "value": "}"
-        }
-      ]
     },
     "module_call": {
       "type": "SEQ",

@@ -34,7 +34,7 @@ module.exports = grammar({
           $.pipeline,
           $.function_definition,
           $.variable,
-          $.module_definition,
+          // $.module_definition,
         ),
       ),
     ),
@@ -84,7 +84,7 @@ module.exports = grammar({
     keyword_null: _ => make_keyword("null"),
     keyword_loop: _ => make_keyword("loop"),
     keyword_internal: _ => make_keyword("internal"),
-    keyword_mod: _ => make_keyword("mod"),
+    keyword_module: _ => make_keyword("module"),
 
     keyword_func: _ => make_keyword("func"),
     keyword_let: _ => make_keyword("let"),
@@ -174,20 +174,20 @@ module.exports = grammar({
       ),
     ),
 
-    module_definition: $ => seq(
-      $.keyword_mod,
-      $.identifier,
-      '{',
-      repeat1(
-        choice(
-          $.variable,
-          $.pipeline,
-          $.module_definition,
-          $.function_definition,
-        )
-      ),
-      '}',
-    ),
+    // module_definition: $ => seq(
+    //   $.keyword_module,
+    //   $.identifier,
+    //   '{',
+    //   repeat1(
+    //     choice(
+    //       $.variable,
+    //       $.pipeline,
+    //       $.module_definition,
+    //       $.function_definition,
+    //     )
+    //   ),
+    //   '}',
+    // ),
 
     module_call: $ => seq(
       field("module",$.identifier),
