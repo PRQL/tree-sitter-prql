@@ -266,13 +266,13 @@ module.exports = grammar({
     ),
 
     _tuples: $ => seq(
-        tuple_list(
-          choice(
-            $.term,
-            seq('(', $.binary_expression, ')'),
-          ),
-          false
+      tuple_list(
+        choice(
+          $.term,
+          seq('(', $.binary_expression, ')'),
         ),
+        false
+      ),
     ),
 
     append: $ => seq(
