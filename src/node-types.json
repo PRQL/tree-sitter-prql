@@ -372,6 +372,10 @@
             "named": false
           },
           {
+            "type": "//",
+            "named": false
+          },
+          {
             "type": "<",
             "named": false
           },
@@ -965,6 +969,67 @@
     }
   },
   {
+    "type": "module_call",
+    "named": true,
+    "fields": {
+      "module": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "submodule": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "module_definition",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "function_definition",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "keyword_mod",
+          "named": true
+        },
+        {
+          "type": "module_definition",
+          "named": true
+        },
+        {
+          "type": "pipeline",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parameter",
     "named": true,
     "fields": {
@@ -1037,6 +1102,10 @@
       "types": [
         {
           "type": "function_definition",
+          "named": true
+        },
+        {
+          "type": "module_definition",
           "named": true
         },
         {
@@ -1425,6 +1494,10 @@
           "named": true
         },
         {
+          "type": "module_call",
+          "named": true
+        },
+        {
           "type": "pipeline",
           "named": true
         },
@@ -1554,6 +1627,10 @@
     "named": false
   },
   {
+    "type": "//",
+    "named": false
+  },
+  {
     "type": ":",
     "named": false
   },
@@ -1599,14 +1676,6 @@
   },
   {
     "type": "Z",
-    "named": false
-  },
-  {
-    "type": "[",
-    "named": false
-  },
-  {
-    "type": "]",
     "named": false
   },
   {
@@ -1738,6 +1807,10 @@
     "named": true
   },
   {
+    "type": "keyword_mod",
+    "named": true
+  },
+  {
     "type": "keyword_null",
     "named": true
   },
@@ -1862,7 +1935,15 @@
     "named": false
   },
   {
+    "type": "{",
+    "named": false
+  },
+  {
     "type": "||",
+    "named": false
+  },
+  {
+    "type": "}",
     "named": false
   }
 ]

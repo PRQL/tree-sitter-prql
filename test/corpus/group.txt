@@ -4,10 +4,10 @@ Simple single group
 
 from employees
 group title (
-  aggregate [
+  aggregate {
     average salary,
     ct = count
-  ]
+  }
 )
 
 --------------------------------------------------------------------------------
@@ -40,11 +40,11 @@ Simple group
 ================================================================================
 
 from employees
-group [title, country] (
-  aggregate [
+group {title, country} (
+  aggregate {
     average salary,
     ct = count
-  ]
+  }
 )
 
 --------------------------------------------------------------------------------

@@ -147,7 +147,7 @@ Pipeline with column select
 
 from employees
 filter department == "Product"
-select [first_name, last_name]
+select {first_name, last_name}
 
 --------------------------------------------------------------------------------
 
@@ -178,15 +178,15 @@ Lists
 ================================================================================
 
 from numbers
-derive [x = 1, y = 2]
-derive [
+derive {x = 1, y = 2}
+derive {
   a = x,
   b = y
-]
-derive [
+}
+derive {
   c = a,
   d = b,
-]
+}
 
 --------------------------------------------------------------------------------
 
@@ -244,10 +244,10 @@ Aggregates
 ================================================================================
 
 from employees
-aggregate [
+aggregate {
   average salary,
   ct = count
-]
+}
 
 --------------------------------------------------------------------------------
 
@@ -288,7 +288,7 @@ from employees # comment
 Basic Example
 ================================================================================
 from employees
-select [id, first_name, age]
+select {id, first_name, age}
 sort age
 take 10
 --------------------------------------------------------------------------------
@@ -321,11 +321,11 @@ take 10
 Expressions
 ================================================================================
 from track_plays
-derive [
+derive {
   finished = started + unfinished,
   fin_share = finished / started,        # Use previous definitions
   fin_ratio = fin_share / (1-fin_share), # BTW, hanging commas are optional!
-]
+}
 --------------------------------------------------------------------------------
 
 (program
@@ -426,9 +426,9 @@ group role (
 Joins
 ================================================================================
 from employees
-join b=benefits [==employee_id]
-join side:left p=positions [p.id==employees.employee_id]
-select [employees.employee_id, p.role, b.vision_coverage]
+join b=benefits (==employee_id)
+join side:left p=positions (p.id==employees.employee_id)
+select {employees.employee_id, p.role, b.vision_coverage}
 
 --------------------------------------------------------------------------------
 
