@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-prql",
-  "version": "0.0.1",
+  "version": "0.9.2",
   "description": "A treesitter grammar for PRQL",
   "main": "grammar.js",
   "scripts": {

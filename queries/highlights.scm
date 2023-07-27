@@ -62,8 +62,10 @@ alias: (identifier) @field
 [
   "("
   ")"
-  "["
-  "]"
+  ; "["
+  ; "]"
+  "{"
+  "}"
 ] @punctuation.bracket
 
 [

@@ -3,7 +3,7 @@ Join
 ================================================================================
 
 from employees
-join positions [employees.id==positions.employee_id]
+join positions (employees.id==positions.employee_id)
 
 --------------------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ Join with direction
 ================================================================================
 
 from employees
-join side:left positions [employees.id==positions.employee_id]
+join side:left positions (employees.id==positions.employee_id)
 
 --------------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ Joins with alias
 ================================================================================
 
 from employees
-join side:left p=positions [employees.id==p.employee_id]
+join side:left p=positions (employees.id==p.employee_id)
 
 --------------------------------------------------------------------------------
 
@@ -92,7 +92,7 @@ Inner joins
 ================================================================================
 
 from employees
-join positions [==emp_no]
+join positions (==emp_no)
 
 --------------------------------------------------------------------------------
 
