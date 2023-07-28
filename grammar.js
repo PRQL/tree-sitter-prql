@@ -14,7 +14,7 @@ module.exports = grammar({
       'binary_times',
       'binary_div',
       'binary_trunc_div',
-      // 'binary_regex',
+      'binary_regex',
       'binary_pipe',
       'binary_relation',
       'alias_assignment',
@@ -86,7 +86,6 @@ module.exports = grammar({
     keyword_internal: _ => make_keyword("internal"),
     keyword_module: _ => make_keyword("module"),
 
-    keyword_func: _ => make_keyword("func"),
     keyword_let: _ => make_keyword("let"),
     keyword_prql: _ => make_keyword("prql"),
     keyword_version: _ => make_keyword("version"),
@@ -149,7 +148,7 @@ module.exports = grammar({
     ),
 
     function_definition: $ => seq(
-      $.keyword_func,
+      $.keyword_let,
       field("name", $.identifier),
       repeat1($.parameter),
       "->",
@@ -609,7 +608,7 @@ module.exports = grammar({
         ['*', 'binary_times'],
         ['/', 'binary_div'],
         ['//', 'binary_trunc_div'],
-        // ['~=', 'binary_regex'],
+        ['~=', 'binary_regex'],
         ['==', 'binary_relation'],
         ['!=', 'binary_relation'],
         ['>', 'binary_relation'],

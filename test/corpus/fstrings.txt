@@ -48,13 +48,13 @@ select db_version = s"version()"
 S Strings functions
 ================================================================================
 
-func average column -> s"AVG({column})"
+let average column -> s"AVG({column})"
 
 --------------------------------------------------------------------------------
 
 (program
   (function_definition
-    (keyword_func)
+    (keyword_let)
     (identifier)
     (parameter
       (identifier))

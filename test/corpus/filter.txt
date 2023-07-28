@@ -63,3 +63,26 @@ filter (age > 25 && department != "IT")
               (identifier))
             (literal
               (literal_string))))))))
+
+================================================================================
+Regex filter
+================================================================================
+
+from tracks
+filter (name ~= "Love")
+
+--------------------------------------------------------------------------------
+
+(program
+  (pipeline
+    (from
+      (keyword_from)
+      (identifier))
+    (transforms
+      (filter
+        (keyword_filter)
+        (binary_expression
+          (field
+            (identifier))
+          (literal
+            (literal_string)))))))

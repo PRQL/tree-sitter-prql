@@ -402,6 +402,10 @@
           {
             "type": "||",
             "named": false
+          },
+          {
+            "type": "~=",
+            "named": false
           }
         ]
       },
@@ -804,7 +808,7 @@
       "required": true,
       "types": [
         {
-          "type": "keyword_func",
+          "type": "keyword_let",
           "named": true
         },
         {
@@ -1724,10 +1728,6 @@
     "named": true
   },
   {
-    "type": "keyword_func",
-    "named": true
-  },
-  {
     "type": "keyword_group",
     "named": true
   },
@@ -1901,6 +1901,10 @@
   },
   {
     "type": "}",
+    "named": false
+  },
+  {
+    "type": "~=",
     "named": false
   }
 ]
