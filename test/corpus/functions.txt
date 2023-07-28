@@ -2,7 +2,7 @@
 Simple functions
 ================================================================================
 
-func fahrenheit_to_celsius temp -> (temp - 32) / 1.8
+let fahrenheit_to_celsius temp -> (temp - 32) / 1.8
 
 from cities
 derive temp_c = (fahrenheit_to_celsius temp_f)
@@ -11,7 +11,7 @@ derive temp_c = (fahrenheit_to_celsius temp_f)
 
 (program
   (function_definition
-    (keyword_func)
+    (keyword_let)
     (identifier)
     (parameter
       (identifier))
@@ -44,7 +44,7 @@ derive temp_c = (fahrenheit_to_celsius temp_f)
 Functions with default parameters
 ================================================================================
 
-func interp lower:0 higher x -> (x - lower) / (higher - lower)
+let interp lower:0 higher x -> (x - lower) / (higher - lower)
 
 from students
 derive {
@@ -56,7 +56,7 @@ derive {
 
 (program
   (function_definition
-    (keyword_func)
+    (keyword_let)
     (identifier)
     (parameter
       (identifier)

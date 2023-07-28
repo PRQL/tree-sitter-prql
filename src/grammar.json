@@ -217,10 +217,6 @@
       "type": "PATTERN",
       "value": "module|MODULE"
     },
-    "keyword_func": {
-      "type": "PATTERN",
-      "value": "func|FUNC"
-    },
     "keyword_let": {
       "type": "PATTERN",
       "value": "let|LET"
@@ -495,7 +491,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "keyword_func"
+          "name": "keyword_let"
         },
         {
           "type": "FIELD",
@@ -2870,6 +2866,39 @@
         },
         {
           "type": "PREC_LEFT",
+          "value": "binary_regex",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "left",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_expression"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "operator",
+                "content": {
+                  "type": "STRING",
+                  "value": "~="
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "right",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_expression"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "PREC_LEFT",
           "value": "binary_relation",
           "content": {
             "type": "SEQ",
@@ -3495,6 +3524,10 @@
       {
         "type": "STRING",
         "value": "binary_trunc_div"
+      },
+      {
+        "type": "STRING",
+        "value": "binary_regex"
       },
       {
         "type": "STRING",
